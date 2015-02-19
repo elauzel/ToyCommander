@@ -1,22 +1,22 @@
 # ToyCommander
 
-AARON)	gather resources (models, textures, etc)
+JEREMY)	make Scene 02: level select (some sort of image or rotating model of the single level - we can add more later)
 
-AARON)	plan a single level (pick out the environment and what will go in it)
+find at least two other vehicle models for the character select, and apply movement/character controllers to them
 
-JAY)	gather resources (audio)
+AARON)	Push Scene 03
 
-JAY)	getting audio, making Scene 00: splash screen (names, title, press 'enter' to play, some sort of image/bg)
+-> Jeremy will then MERGE Scene 03 with Textures & Models branch after Aaron pushes it
+
+pull Scene 03 and then integrate resources (models, textures, etc) with Scene 03: apartment level
+
+JAY)	making Scene 00: splash screen (names, title, press 'enter' to play, some sort of image/bg)
 
 JAY)	make Scene 01: game menu (controls, multiplayer, instructions menus)
 
-JEREMY)	GitHub shenanigans, then when Aaron picks out the final level model:
-
-JEREMY)	make Scene 02: level select (some sort of image or rotating model of the single level - we can add more later)
+-> Jeremy will then MERGE Scene 00, 01, 02, and 03 branches with MASTER
 
 == Week 2 +
-
-06)	make Scene 03: level (apartment - just the building and environment itself for now)
 
 07)	make Scene 04: character select (start with 3 models without moving parts at first - we can add more later)
 
