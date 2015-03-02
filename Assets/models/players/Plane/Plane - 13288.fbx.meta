@@ -1,0 +1,115 @@
+fileFormatVersion: 2
+guid: fe4080ee66662f344879a0d39cb2599f
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Aileron.L
+    100002: Aileron.L_end
+    100004: Aileron.R
+    100006: Aileron.R_end
+    100008: Camera
+    100010: Camera.001
+    100012: Elevator.L
+    100014: Elevator.L_end
+    100016: Elevator.R
+    100018: Elevator.R_end
+    100020: Jet
+    100022: Plane
+    100024: //RootNode
+    100026: Plane 1
+    100028: Rudder.L
+    100030: Rudder.L_end
+    100032: Rudder.R
+    100034: Rudder.R_end
+    100036: Sky
+    100038: Sun
+    400000: Aileron.L
+    400002: Aileron.L_end
+    400004: Aileron.R
+    400006: Aileron.R_end
+    400008: Camera
+    400010: Camera.001
+    400012: Elevator.L
+    400014: Elevator.L_end
+    400016: Elevator.R
+    400018: Elevator.R_end
+    400020: Jet
+    400022: Plane
+    400024: //RootNode
+    400026: Plane 1
+    400028: Rudder.L
+    400030: Rudder.L_end
+    400032: Rudder.R
+    400034: Rudder.R_end
+    400036: Sky
+    400038: Sun
+    2300000: Plane 1
+    3300000: Plane 1
+    4300000: Plane
+    7400000: Jet|Camera.001Action
+    7400002: Jet|PlaneAction
+    7400004: Plane|Camera.001Action
+    7400006: Plane|PlaneAction
+    7400008: Camera|Camera.001Action
+    7400010: Camera|PlaneAction
+    7400012: Sun|Camera.001Action
+    7400014: Sun|PlaneAction
+    7400016: Camera.001|Camera.001Action
+    7400018: Camera.001|PlaneAction
+    7400020: Sky|Camera.001Action
+    7400022: Sky|PlaneAction
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .200000003
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
