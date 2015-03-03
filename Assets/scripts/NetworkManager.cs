@@ -51,7 +51,7 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log("Connected to Room");
 
 		// Spawn player
-		PhotonNetwork.Instantiate(playerPrefab, Vector3.up * 5, Quaternion.identity, 0);
+		//PhotonNetwork.Instantiate(playerPrefab, Vector3.up * 5, Quaternion.identity, 0);
 		// PhotonNetwork.Instantiate(playerPrefab.name, Vector3.up * 5, Quaternion.identity, 0);
 	}
 

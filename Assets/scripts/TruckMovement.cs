@@ -21,7 +21,7 @@ public class TruckMovement : MonoBehaviour {
 		InputMovement();
 	}
 
-	void InputMovement() {
+	public void InputMovement() {
 		//		if (Input.GetKey(KeyCode.W))
 		//			rigidbody.MovePosition(rigidbody.position + Vector3.forward * speed * Time.deltaTime);
 		//		
