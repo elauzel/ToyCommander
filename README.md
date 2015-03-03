@@ -1,39 +1,27 @@
 # ToyCommander
 
-JEREMY)	make Scene 02: level select (some sort of image or rotating model of the single level - we can add more later)
+JAY - scene setup)
 
-find at least two other vehicle models for the character select, and apply movement/character controllers to them
+1)	insert truck into splash screen texture
 
-AARON)	Push Scene 03
+2)	make Scene 01: game menu (controls, multiplayer, instructions menus)
 
--> Jeremy will then MERGE Scene 03 with Textures & Models branch after Aaron pushes it
+3)	make Scene 02: level select (some sort of image or rotating model of the single level - we can add more later)
 
-pull Scene 03 and then integrate resources (models, textures, etc) with Scene 03: apartment level
+4)	make Scene 03: character select (start with 3 models without moving parts at first - we can add more later)
 
-JAY)	making Scene 00: splash screen (names, title, press 'enter' to play, some sort of image/bg)
 
-JAY)	make Scene 01: game menu (controls, multiplayer, instructions menus)
 
--> Jeremy will then MERGE Scene 00, 01, 02, and 03 branches with MASTER
+AARON & JEREMY - coding and testing)
 
-== Week 2 +
+1)	put move script on 3 other models
 
-07)	make Scene 04: character select (start with 3 models without moving parts at first - we can add more later)
+2)	find and place models for obstacles and items
 
-08)	code and test character movement mechanics and controls with physics
+3)	implement item mechanics (powerups, ammunition, start simple)
 
-09)	code and test obstacles/destructable environment parts with physics
+4)	implement shooting mechanics, likely with raycasting and a projectile object (unlimited ammo at first)
 
-10)	code and test item placements with physics
+5)	implement health mechanics and gui overlays for health bars
 
-11)	code and test shooting mechanics, likely with raycasting and a projectile object (unlimited ammo at first)
-
-12)	code and test health mechanics, gui overlays for bars
-
-13)	code and test game over / win mechanics (set number of lives, last man standing?)
-
-14)	code and test item mechanics (powerups, ammunition, start simple)
-
-15)	make more characters
-
-16)	make more levels
+6)	implement death and respawn mechanics for each level
