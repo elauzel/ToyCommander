@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewNetwork : MonoBehaviour {
-	TruckMovement tm = new TruckMovement();
+public class NewNetwork : Photon.MonoBehaviour {
+	GameObject monster;
+
 
 	// Use this for initialization
 	void Start () {
@@ -11,8 +12,7 @@ public class NewNetwork : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//if (photonView.isMine)
-		//tm.InputMovement();
+
 	}
 
 	void OnGUI()
@@ -33,7 +33,12 @@ public class NewNetwork : MonoBehaviour {
 
 	void OnJoinedRoom()
 	{
-		GameObject monster = PhotonNetwork.Instantiate("Player - Truck", Vector3.zero, Quaternion.identity, 0);
+
+		monster = PhotonNetwork.Instantiate("Player - Truck", Vector3.zero, Quaternion.identity, 0);
+		PhotonView photonView = monster.GetComponent<PhotonView>();
+
+		if (photonView.isMine)
+			monster.GetComponent<TruckMovement>().enabled = true;
 		//Camera camera = monster.GetComponentInChildren<Camera> ();
 		//CharacterCamera camera = monster.GetComponent<CharacterCamera>();
 		//camera.enabled = true;
