@@ -13,7 +13,9 @@ public class NewNetwork : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-	}
+		}
+
+
 
 	void OnGUI()
 	{
@@ -33,17 +35,25 @@ public class NewNetwork : Photon.MonoBehaviour {
 
 	void OnJoinedRoom()
 	{
-
+	
 		monster = PhotonNetwork.Instantiate("Player - Truck", Vector3.zero, Quaternion.identity, 0);
-		PhotonView photonView = monster.GetComponent<PhotonView>();
 
-		if (photonView.isMine)
-			monster.GetComponent<TruckMovement>().enabled = true;
+
+		//PhotonView photonView = monster.GetComponent<PhotonView>();
+
+		//if (!photonView.isMine) {
+		monster.GetComponent<TruckMovement> ().enabled = true;
+
+		monster.GetComponentInChildren<Camera>().enabled = true;
+		//monster.GetComponentInChildren("Main Camera").animation.gameObject.SetActive (true);
+		//}
+
 		//Camera camera = monster.GetComponentInChildren<Camera> ();
 		//CharacterCamera camera = monster.GetComponent<CharacterCamera>();
 		//camera.enabled = true;
 
-	}
+	
 
 
+}
 }
