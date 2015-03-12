@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class NewNetwork : Photon.MonoBehaviour {
-	GameObject monster;
+	GameObject player;
 
 
 	// Use this for initialization
@@ -14,8 +14,6 @@ public class NewNetwork : Photon.MonoBehaviour {
 	void Update () {
 
 		}
-
-
 
 	void OnGUI()
 	{
@@ -36,24 +34,10 @@ public class NewNetwork : Photon.MonoBehaviour {
 	void OnJoinedRoom()
 	{
 	
-		monster = PhotonNetwork.Instantiate("Player - Truck", Vector3.zero, Quaternion.identity, 0);
-
-
-		//PhotonView photonView = monster.GetComponent<PhotonView>();
-
-		//if (!photonView.isMine) {
-		monster.GetComponent<TruckMovement> ().enabled = true;
-
-		monster.GetComponentInChildren<Camera>().enabled = true;
-		//monster.GetComponentInChildren("Main Camera").animation.gameObject.SetActive (true);
-		//}
-
-		//Camera camera = monster.GetComponentInChildren<Camera> ();
-		//CharacterCamera camera = monster.GetComponent<CharacterCamera>();
-		//camera.enabled = true;
-
+		player = PhotonNetwork.Instantiate("Player - Truck", Vector3.zero, Quaternion.identity, 0);
 	
-
+		player.GetComponent<TruckMovement> ().enabled = true;
+		player.GetComponentInChildren<Camera>().enabled = true;
 
 }
 }
