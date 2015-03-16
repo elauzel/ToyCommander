@@ -26,7 +26,7 @@ public class NetworkCharacter1 : Photon.MonoBehaviour {
 	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
 		if (stream.isWriting) {
 			stream.SendNext(transform.position);
-			stream.SendNext (transform.rotation);
+			stream.SendNext(transform.rotation);
 
 		} 
 
