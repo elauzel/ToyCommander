@@ -5,6 +5,8 @@ public class TruckMovement : MonoBehaviour {
 	public float speedGas = 10f;
 	public float speedTurn = 10f;
 	public float speedRotation = 10f;
+	private float speed;
+	private int slowDownMore;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +16,7 @@ public class TruckMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Debug.Log("Update time on Truck:" + Time.deltaTime);
+		speed = rigidbody.velocity.magnitude;
 	}
 
 	void FixedUpdate ()	{
@@ -22,36 +25,31 @@ public class TruckMovement : MonoBehaviour {
 	}
 
 	public void InputMovement() {
-		//		if (Input.GetKey(KeyCode.W))
-		//			rigidbody.MovePosition(rigidbody.position + Vector3.forward * speed * Time.deltaTime);
-		//		
-		//		if (Input.GetKey(KeyCode.S))
-		//			rigidbody.MovePosition(rigidbody.position - Vector3.forward * speed * Time.deltaTime);
-		//		
-		//		if (Input.GetKey(KeyCode.D))
-		//			rigidbody.MovePosition(rigidbody.position + Vector3.right * speed * Time.deltaTime);
-		//		
-		//		if (Input.GetKey(KeyCode.A))
-		//			rigidbody.MovePosition(rigidbody.position - Vector3.right * speed * Time.deltaTime);
+		// model is rotated 270 degrees from Blender to face the right direction
+		slowDownMore = 1;
 
-
-		// model is rotated 270 degrees from Blender
 		if (Input.GetKey (KeyCode.W)) {
 			rigidbody.AddRelativeForce(Vector3.right * -speedGas);
-		}
-
-		if (Input.GetKey (KeyCode.A)) {
-			rigidbody.AddRelativeForce(Vector3.forward * -speedTurn);
-			rigidbody.rotation = Quaternion.Euler(rigidbody.rotation.eulerAngles + new Vector3(0f, -speedRotation/2, 0f));
+			slowDownMore = 3;
 		}
 
 		if (Input.GetKey (KeyCode.S)) {
 			rigidbody.AddRelativeForce(Vector3.left * -speedGas);
+			slowDownMore = 3;
 		}
-
+		
+		if (Input.GetKey (KeyCode.A)) {
+			if (speed > .5) { // if the truck is moving
+				rigidbody.AddRelativeForce(Vector3.left * -speedGas/100*slowDownMore); // slow it down more if you have the gas on
+				rigidbody.rotation = Quaternion.Euler(rigidbody.rotation.eulerAngles + new Vector3(0f, -speedRotation/2, 0f));
+			}
+		}
+		
 		if (Input.GetKey (KeyCode.D)) {
-			rigidbody.AddRelativeForce(Vector3.back * -speedTurn);
-			rigidbody.rotation = Quaternion.Euler(rigidbody.rotation.eulerAngles + new Vector3(0f, speedRotation/2, 0f));
+			if (speed > .5) { // if the truck is moving
+				rigidbody.AddRelativeForce(Vector3.left * -speedGas/100*slowDownMore); // slow it down more if you have the gas on
+				rigidbody.rotation = Quaternion.Euler(rigidbody.rotation.eulerAngles + new Vector3(0f, speedRotation/2, 0f));
+			}
 		}
 		
 		if (Input.GetKey (KeyCode.Space)) {
