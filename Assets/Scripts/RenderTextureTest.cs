@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RTtest : MonoBehaviour {
+public class RenderTextureTest : MonoBehaviour {
 	public float refresh = 0.01666666666666666666666666666667f;
 
 	// Use this for initialization
@@ -15,6 +15,6 @@ public class RTtest : MonoBehaviour {
 	}
 
 	void SimulateRenderTexure() {		
-		renderer.material.mainTexture = RenderTextureFree.Capture();
+		renderer.material.mainTexture = RenderTextureScript.Capture();
 	}
 }

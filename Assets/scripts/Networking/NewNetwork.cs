@@ -35,7 +35,8 @@ public class NewNetwork : Photon.MonoBehaviour {
 	{
 	
 		//player = PhotonNetwork.Instantiate("Player - Truck", Vector3.zero, Quaternion.identity, 0);
-		player = PhotonNetwork.Instantiate("Player - Truck", new Vector3(2f, 0.115f, 12f), Quaternion.identity, 0);
+		//player = PhotonNetwork.Instantiate("Player - Truck", new Vector3(2f, 0.115f, 12f), Quaternion.identity, 0);
+		player = PhotonNetwork.Instantiate("Player - Truck", new Vector3(2f, 1f, 12f), Quaternion.identity, 0);
 
 		player.GetComponent<TruckMovement> ().enabled = true;
 		player.GetComponent<Shoot> ().enabled = true;

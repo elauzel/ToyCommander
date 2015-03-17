@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RenderTextureFree : MonoBehaviour {
+public class RenderTextureScript : MonoBehaviour {
 	/// <summary>
 	/// Simulate a RenderTexture. The process need a Texture.Apply, which takes a lot of time,
 	/// so don't use this every frames.
