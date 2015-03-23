@@ -23,4 +23,6 @@ AARON & JEREMY - coding and testing)
 
 6)	implement death and respawn mechanics for each level
 
-7) continue working on network code
+7)  continue working on network code
+
+8)  create Photon lobby
