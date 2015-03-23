@@ -4,9 +4,9 @@ JAY - scene setup)
 
 1)	finish Scene 01: game menu (controls, instructions menus)
 
-3)	finish Scene 03: character select - this should happen whenever someone hits Free Play or Multiplayer
+2)	finish Scene 03: character select - this should happen whenever someone hits Free Play or Multiplayer
 
-2)	make Scene 02: level select (some sort of image or rotating model of each level) - this should after character select
+3)	make Scene 02: level select (some sort of image or rotating model of each level) - this should after character select
 
 
 AARON & JEREMY - coding and testing)
