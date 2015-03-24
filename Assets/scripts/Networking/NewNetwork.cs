@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class NewNetwork : Photon.MonoBehaviour {
-	GameObject player;
-	public float playerHealth = 100f;
+	 GameObject player;
+
 
 	// Use this for initialization
 	void Start () {
@@ -39,16 +39,11 @@ public class NewNetwork : Photon.MonoBehaviour {
 		player = PhotonNetwork.Instantiate("Player - Truck", new Vector3(2f, 1f, 12f), Quaternion.identity, 0);
 
 		player.GetComponent<TruckMovement> ().enabled = true;
-		player.GetComponent<Shoot> ().enabled = true;
+		((MonoBehaviour)player.GetComponent("RaycastShooting") ).enabled = true;
+		((MonoBehaviour)player.GetComponent("PlayerHealth") ).enabled = true;
 		player.GetComponentInChildren<Camera>().enabled = true;
 
 }
-	void onShot()
-	{
-		playerHealth -= 30f;
-		if (playerHealth <= 0) {
-			Destroy(gameObject);
-		}
-	}
+	
 
 }
