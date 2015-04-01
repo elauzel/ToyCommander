@@ -39,8 +39,10 @@ public class NewNetwork : Photon.MonoBehaviour {
 		player = PhotonNetwork.Instantiate("Player - Truck", new Vector3(2f, 1f, 12f), Quaternion.identity, 0);
 
 		player.GetComponent<TruckMovement> ().enabled = true;
-		((MonoBehaviour)player.GetComponent("RaycastShooting") ).enabled = true;
-		((MonoBehaviour)player.GetComponent("PlayerHealth") ).enabled = true;
+		player.GetComponent<RaycastShooting1> ().enabled = true;
+		player.GetComponent<PlayerHealth1> ().enabled = true;
+		//((MonoBehaviour)player.GetComponent("RaycastShooting") ).enabled = true;
+		//((MonoBehaviour)player.GetComponent("PlayerHealth") ).enabled = true;
 		player.GetComponentInChildren<Camera>().enabled = true;
 
 }
