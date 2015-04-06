@@ -46,6 +46,13 @@ public class NewNetwork : Photon.MonoBehaviour {
 		player.GetComponentInChildren<Camera>().enabled = true;
 
 }
+
+	public void OnPlayerDeath()
+	{
+		PhotonView photonView = PhotonView.Get(this);
+		photonView.RPC("Dead", PhotonTargets.All);
+
+	}
 	
 
 }

@@ -8,7 +8,7 @@ public class RaycastShooting1 : MonoBehaviour {
 
 	private Ray ray; // the ray that will be shot
 	private RaycastHit hit; // variable to hold the object that is hit
-	PlayerHealth1 healthC = new PlayerHealth1();
+	PlayerHealth1 healthC;
 
 
 	// Use this for initialization
@@ -46,7 +46,24 @@ public class RaycastShooting1 : MonoBehaviour {
 				GameObject hole = (GameObject)GameObject.Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation);
 
 
+				//hit.rigidbody.AddForce(ray.direction * 20);
+				//hit.rigidbody.GetComponent(PlayerHealth1);
+
+				print (hit.collider.transform.gameObject.name);
+
+				try {
+					healthC = hit.collider.transform.gameObject.GetComponent<PlayerHealth1> ();
+
 				healthC.ChangeHealth(damagePerBullet);
+				}
+				catch
+				{
+
+				}
+				//healthC =  (hit.collider.transform.gameObject.GetComponent(PlayerHealth1));
+
+
+				//print (healthC.ChangeHealth(damagePerBullet));
 
 			}
 		}
