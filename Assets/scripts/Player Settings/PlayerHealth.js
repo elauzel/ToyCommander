@@ -23,8 +23,3 @@ function Dead()
 {
 	Destroy (gameObject);
 }
-
-
-
-
-
