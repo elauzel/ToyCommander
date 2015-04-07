@@ -2,11 +2,11 @@
 
 JAY - scene setup)
 
-1)	finish Scene 01: game menu (controls, instructions menus)
+1)	Any last additions to Scene 01: game menu (controls, instructions menus)
 
-2)	finish Scene 03: character select - this should happen whenever someone hits Free Play or Multiplayer
+2)	Carrying selection from Scene 03: character select
 
-3)	make Scene 02: level select (some sort of image or rotating model of each level) - this should after character select
+3)	Carrying selection from make Scene 02: level select
 
 
 AARON & JEREMY - coding and testing)
