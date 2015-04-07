@@ -4,6 +4,7 @@ using System.Collections;
 public class NewNetwork : Photon.MonoBehaviour {
 	GameObject player;
 	public float playerHealth = 100f;
+	public float startX, startY, startZ;
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +37,7 @@ public class NewNetwork : Photon.MonoBehaviour {
 	
 		//player = PhotonNetwork.Instantiate("Player - Truck", Vector3.zero, Quaternion.identity, 0);
 		//player = PhotonNetwork.Instantiate("Player - Truck", new Vector3(2f, 0.115f, 12f), Quaternion.identity, 0);
-		player = PhotonNetwork.Instantiate("Player - Truck", new Vector3(2f, 1f, 12f), Quaternion.identity, 0);
+		player = PhotonNetwork.Instantiate("Player - Truck", new Vector3(startX, startY, startZ), Quaternion.identity, 0);
 
 		player.GetComponent<TruckMovement> ().enabled = true;
 		player.GetComponent<Shoot> ().enabled = true;

@@ -5,8 +5,8 @@ public class Shoot : MonoBehaviour
 {
 	public Rigidbody projectile;
 	public Transform shotPos;
-	public float shotForce = 1000f;
-	public float moveSpeed = 100f;
+	public float shotForce = 5f;
+	public float moveSpeed = 0.5f;
 	
 	
 	void Update ()
