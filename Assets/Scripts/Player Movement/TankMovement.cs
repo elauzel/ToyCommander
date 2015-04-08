@@ -6,7 +6,6 @@ public class TankMovement : MonoBehaviour {
 	public float speedTurn = 10f;
 	public float speedRotation = 10f;
 	private float speed;
-	private int slowDownMore;
 	
 	// Use this for initialization
 	void Start () {
@@ -25,16 +24,13 @@ public class TankMovement : MonoBehaviour {
 	}
 	
 	public void InputMovement() {
-		slowDownMore = 1;
 		
 		if (Input.GetKey (KeyCode.W)) {
 			rigidbody.AddRelativeForce(Vector3.forward * -speedGas);
-			slowDownMore = 3;
 		}
 		
 		if (Input.GetKey (KeyCode.S)) {
 			rigidbody.AddRelativeForce(Vector3.back * -speedGas);
-			slowDownMore = 3;
 		}
 		
 		if (Input.GetKey (KeyCode.A)) {
@@ -51,8 +47,8 @@ public class TankMovement : MonoBehaviour {
 			rigidbody.AddRelativeForce(Vector3.up * speedGas);
 		}
 		
-		if (Input.GetKey (KeyCode.DownArrow)) {
-			rigidbody.AddRelativeForce(Vector3.up * -speedGas);
+		if (Input.GetKey (KeyCode.LeftShift)) {
+			rigidbody.AddRelativeForce(Vector3.down * speedGas / 2);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {

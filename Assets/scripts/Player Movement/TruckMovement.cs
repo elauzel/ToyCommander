@@ -56,8 +56,8 @@ public class TruckMovement : MonoBehaviour {
 			rigidbody.AddRelativeForce(Vector3.up * speedGas);
 		}
 		
-		if (Input.GetKey (KeyCode.DownArrow)) {
-			rigidbody.AddRelativeForce(Vector3.up * -speedGas);
+		if (Input.GetKey (KeyCode.LeftShift)) {
+			rigidbody.AddRelativeForce(Vector3.down * speedGas / 2);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {
