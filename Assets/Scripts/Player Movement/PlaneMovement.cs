@@ -20,18 +20,15 @@ public class PlaneMovement : MonoBehaviour {
 	
 	void FixedUpdate ()	{
 		Debug.Log("FixedUpdate time on Plane:" + Time.deltaTime);
+		accelerate ();
 		InputMovement();
+	}
+
+	void accelerate() {
+		rigidbody.AddRelativeForce(Vector3.forward * speedGas);
 	}
 	
 	public void InputMovement() {
-		
-		if (Input.GetKey (KeyCode.W)) {
-			rigidbody.AddRelativeForce(Vector3.forward * speedGas);
-		} 
-		
-		if (Input.GetKey (KeyCode.S)) {
-			rigidbody.AddRelativeForce(Vector3.back * speedGas);
-		}
 		
 		if (Input.GetKey (KeyCode.A)) {
 			rigidbody.rotation = Quaternion.Euler(rigidbody.rotation.eulerAngles + new Vector3(0f, -speedRotation/2, 0f));

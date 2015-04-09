@@ -20,7 +20,6 @@ public class RaycastShooting1 : MonoBehaviour {
 	void Update () {
 		if(Input.GetButtonDown("Fire1"))
 		{
-
 			// The Vector2 class holds the position for a point with only x and y coordinates
 			// The center of the screen is calculated by dividing the width and height by half
 			Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
@@ -30,13 +29,10 @@ public class RaycastShooting1 : MonoBehaviour {
 			ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
 			if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane))
-			{
-				// A collision was detected please deal with it
+			{	// A collision was detected please deal with it
 
 				// We need a variable to hold the position of the prefab
 				// The point of contact with the model is given by the hit.point
-			
-
 				Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
 
 				// We need a variable to hold the rotation of the prefab
@@ -45,16 +41,13 @@ public class RaycastShooting1 : MonoBehaviour {
 				
 				GameObject hole = (GameObject)GameObject.Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation);
 
-
 				//hit.rigidbody.AddForce(ray.direction * 20);
 				//hit.rigidbody.GetComponent(PlayerHealth1);
-
 				print (hit.collider.transform.gameObject.name);
 
 				try {
 					healthC = hit.collider.transform.gameObject.GetComponent<PlayerHealth1> ();
-
-				healthC.ChangeHealth(damagePerBullet);
+					healthC.ChangeHealth(damagePerBullet);
 				}
 				catch
 				{
@@ -62,9 +55,7 @@ public class RaycastShooting1 : MonoBehaviour {
 				}
 				//healthC =  (hit.collider.transform.gameObject.GetComponent(PlayerHealth1));
 
-
 				//print (healthC.ChangeHealth(damagePerBullet));
-
 			}
 		}
 	}
