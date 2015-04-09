@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerHealth1 : MonoBehaviour {
+public class PlayerHealth : MonoBehaviour {
 	public int health;
 	public GameObject network;
 
@@ -27,7 +27,7 @@ public class PlayerHealth1 : MonoBehaviour {
 
 	}
 
-	public  void ChangeHealth(int healthChange)
+	[RPC]	public  void ChangeHealth(int healthChange)
 	{
 		print ("Health Change happens here");
 		health -= healthChange;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NetworkCharacter1 : Photon.MonoBehaviour {
+public class NewNetworkCharacter : Photon.MonoBehaviour {
 
 	Vector3 realPosition = Vector3.zero;
 	Quaternion realRotation = Quaternion.identity;

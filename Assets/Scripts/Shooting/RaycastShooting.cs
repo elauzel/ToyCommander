@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RaycastShooting1 : MonoBehaviour {
+public class RaycastShooting : MonoBehaviour {
 
 	public GameObject bulletHolePrefab; // bullet hole prefab to instantiate
 	public int damagePerBullet = 100;
 
 	private Ray ray; // the ray that will be shot
 	private RaycastHit hit; // variable to hold the object that is hit
-	PlayerHealth1 healthC;
+	PlayerHealth healthC;
 
 
 	// Use this for initialization
@@ -41,21 +41,17 @@ public class RaycastShooting1 : MonoBehaviour {
 				
 				GameObject hole = (GameObject)GameObject.Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation);
 
-				//hit.rigidbody.AddForce(ray.direction * 20);
-				//hit.rigidbody.GetComponent(PlayerHealth1);
 				print (hit.collider.transform.gameObject.name);
 
 				try {
-					healthC = hit.collider.transform.gameObject.GetComponent<PlayerHealth1> ();
-					healthC.ChangeHealth(damagePerBullet);
+					healthC = hit.collider.transform.gameObject.GetComponent<PlayerHealth> ();
+					//healthC.ChangeHealth(damagePerBullet);
+					healthC.GetComponent<PhotonView>().RPC ("ChangeHealth",PhotonTargets.All,damagePerBullet);
 				}
 				catch
 				{
 
 				}
-				//healthC =  (hit.collider.transform.gameObject.GetComponent(PlayerHealth1));
-
-				//print (healthC.ChangeHealth(damagePerBullet));
 			}
 		}
 	}
