@@ -33,9 +33,9 @@ public class NewNetwork : Photon.MonoBehaviour {
 	
 	void OnJoinedRoom()
 	{
-		player = PhotonNetwork.Instantiate("Player - Truck", new Vector3(2f, 1.5f, 12f), Quaternion.identity, 0);
+		player = PhotonNetwork.Instantiate("Player - Helicopter", new Vector3(2f, 1.5f, 12f), Quaternion.identity, 0);
 		
-		player.GetComponent<TruckMovement> ().enabled = true;
+		player.GetComponent<HelicopterMovement> ().enabled = true;
 		player.GetComponent<RaycastShooting> ().enabled = true;
 		player.GetComponent<PlayerHealth> ().enabled = true;
 		player.GetComponentInChildren<Camera>().enabled = true;
