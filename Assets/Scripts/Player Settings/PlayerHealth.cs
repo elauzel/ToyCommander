@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerHealth : Photon.MonoBehaviour {
 	public int health;
+	public GameObject obj;
 
 	// Use this for initialization
 	void Start () {
@@ -35,10 +36,24 @@ public class PlayerHealth : Photon.MonoBehaviour {
 
 	 void Dead()
 	{
+
+
 		print ("Died at " + Time.deltaTime + "!");
 
+		//String name = gameObject.name;
+		while ( obj.GetComponent("Body") != null)
+		   
+			
+			obj.gameObject.collider.enabled = false;
+			
+
+
+		//Component body = gameObject.GetComponent("Body"); 
+		//body.GetComponent <MeshRenderer>().enabled = false;
+
+
 		//if (!photonView.isMine) {
-			Destroy (gameObject);
+			//Destroy (gameObject);
 		//} else {
 			//if (GUI.Button(new Rect(10, 70, 50, 30), "Respawn"))
 			//{
