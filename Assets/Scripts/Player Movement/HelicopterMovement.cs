@@ -3,7 +3,6 @@ using System.Collections;
 
 public class HelicopterMovement : MonoBehaviour {
 	public float speedGas = 1.5f;
-	public float speedTurn = 3f;
 	public float speedRotation = 0.75f;
 	private Rigidbody body;
 	

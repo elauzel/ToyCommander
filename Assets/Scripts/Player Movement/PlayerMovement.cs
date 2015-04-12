@@ -13,9 +13,9 @@ public class PlayerMovement : MonoBehaviour {
 	
 	}
 
-	public static void moveWith (Rigidbody body, float thisSpeed, bool isTruck)
+	public static void moveWith (Rigidbody body, float thisSpeed, bool truckOrTank)
 	{
-		if (isTruck) {
+		if (truckOrTank) {
 			body.AddRelativeForce (Vector3.left * thisSpeed);
 		} else {
 			body.AddRelativeForce (Vector3.back * thisSpeed);

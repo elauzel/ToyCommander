@@ -4,6 +4,9 @@ using System.Collections;
 public class NewNetwork : Photon.MonoBehaviour {
 	GameObject player;
 	public PlayerType type;
+	public float x;
+	public float y;
+	public float z;
 	
 	
 	// Use this for initialization
@@ -35,7 +38,7 @@ public class NewNetwork : Photon.MonoBehaviour {
 	
 	void OnJoinedRoom()
 	{
-		Vector3 location = new Vector3 (2f, 1.5f, 12f);
+		Vector3 location = new Vector3 (x, y, z);
 		SpawnPlayerAt (location);
 	}
 	

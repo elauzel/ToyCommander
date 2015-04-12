@@ -3,7 +3,6 @@ using System.Collections;
 
 public class RacecarMovement : MonoBehaviour {
 	public float speedGas = 2.5f;
-	public float speedTurn = 5f;
 	public float speedRotation = 2.5f;
 	private Rigidbody body;
 	

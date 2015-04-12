@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlaneMovement : MonoBehaviour {
 	public float speedGas = 7f;
-	public float speedTurn = 4f;
 	public float speedRotation = 2f;
 	private Rigidbody body;
 

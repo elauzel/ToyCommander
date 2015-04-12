@@ -3,7 +3,6 @@ using System.Collections;
 
 public class TankMovement : MonoBehaviour {
 	public float speedGas = 10f;
-	public float speedTurn = 5f;
 	public float speedRotation = 2f;
 	private Rigidbody body;
 	
@@ -26,11 +25,11 @@ public class TankMovement : MonoBehaviour {
 	public void InputMovement() {
 
 		if (Input.GetKey (KeyCode.W)) {
-			PlayerMovement.moveWith (body, speedGas, false);
+			PlayerMovement.moveWith (body, speedGas, true);
 		}
 		
 		if (Input.GetKey (KeyCode.S)) {
-			PlayerMovement.moveWith (body, -speedGas, false);
+			PlayerMovement.moveWith (body, -speedGas, true);
 		}
 		
 		if (Input.GetKey (KeyCode.A)) {
