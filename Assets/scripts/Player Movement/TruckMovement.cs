@@ -36,12 +36,12 @@ public class TruckMovement : MonoBehaviour {
 		
 		if (Input.GetKey (KeyCode.A)) {
 			PlayerMovement.moveWith (body, -speedGas/25, true); // slow it down the more you have the gas on
-			PlayerMovement.rotateIfMoving(body, 0.5f, -speedRotation);
+			PlayerMovement.rotateIfMoving(body, 0.5f, -speedRotation, 'y');
 		} 
 		
 		if (Input.GetKey (KeyCode.D)) {
 			PlayerMovement.moveWith (body, -speedGas/25, true); // slow it down the more you have the gas on
-			PlayerMovement.rotateIfMoving(body, 0.5f, speedRotation);
+			PlayerMovement.rotateIfMoving(body, 0.5f, speedRotation, 'y');
 		}
 		
 		if (Input.GetKey (KeyCode.Space)) {

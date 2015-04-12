@@ -34,12 +34,12 @@ public class TankMovement : MonoBehaviour {
 		
 		if (Input.GetKey (KeyCode.A)) {
 			PlayerMovement.stop(body);
-			PlayerMovement.rotate (body, -speedRotation);
+			PlayerMovement.rotate (body, -speedRotation, 'y');
 		} 
 		
 		if (Input.GetKey (KeyCode.D)) {
 			PlayerMovement.stop(body);
-			PlayerMovement.rotate (body, speedRotation);
+			PlayerMovement.rotate (body, speedRotation, 'y');
 		}
 		
 		if (Input.GetKey (KeyCode.Space)) {
