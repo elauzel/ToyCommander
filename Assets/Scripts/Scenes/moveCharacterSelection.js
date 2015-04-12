@@ -12,25 +12,19 @@ var vehicle_counter = 1;
 // 4 = heli
 // 5 = racecar
 
-function  moveLeft(){
-	if (originX > -50){
+function  moveLeft() {
+	if (originX > -50) {
 		originX -= 15;
-
-transform.position = Vector3(originX,originY,originZ);
-
-vehicle_counter += 1;
-
-}
+		transform.position = Vector3(originX,originY,originZ);
+		vehicle_counter += 1;
+	}
 }
 
 
-function moveRight(){
-	if (originX < 0){
+function moveRight() {
+	if (originX < 0) {
 		originX += 15;
-
-transform.position = Vector3(originX,originY,originZ);
-
-vehicle_counter -= 1;
-
-}
+		transform.position = Vector3(originX,originY,originZ);
+		vehicle_counter -= 1;
+	}
 }
