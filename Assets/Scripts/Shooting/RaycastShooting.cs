@@ -6,6 +6,8 @@ public class RaycastShooting : MonoBehaviour {
 	public GameObject bulletHolePrefab; // bullet hole prefab to instantiate
 	public PlayerHealth health;
 	public int damagePerBullet = 100;
+	//public GameObject player;
+	private Transform shootPos;
 
 	private Ray firedRay; // the ray that will be shot
 	private RaycastHit hit; // variable to hold the object that is hit
@@ -55,7 +57,10 @@ public class RaycastShooting : MonoBehaviour {
 
 	bool collision ()
 	{
+		//shootPos = player.GetComponent ("Shoot Position");
+		//Vector3 VecShot = new Vector3(shootPos.position.x,shootPos.position.y,shootPos.position.z);
 		return Physics.Raycast (firedRay, out hit, Camera.main.farClipPlane);
+
 	}
 
 	void placeBulletHole ()
