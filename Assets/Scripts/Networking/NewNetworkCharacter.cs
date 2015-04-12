@@ -12,8 +12,8 @@ public class NewNetworkCharacter : Photon.MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		Debug.Log("Update time on NewNetworkCharacter:" + Time.deltaTime);
+	void FixedUpdate () {
+		//Debug.Log("Update time on NewNetworkCharacter:" + Time.deltaTime);
 
 		if (!photonView.isMine) {
 			transform.position = Vector3.Lerp(transform.position, realPosition, 0.1f); 

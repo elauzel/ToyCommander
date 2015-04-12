@@ -4,9 +4,9 @@ using System.Collections;
 public class NewNetwork : Photon.MonoBehaviour {
 	GameObject player;
 	public PlayerType type;
-	public float x;
-	public float y;
-	public float z;
+	public float x = 0;
+	public float y = 0;
+	public float z = 0;
 	
 	
 	// Use this for initialization
