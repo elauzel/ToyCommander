@@ -12,62 +12,36 @@ public class PlayerHealth : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		print ("Update is called");
-//		if (health < 1) {
-//			print ("Is supposed to be dead");
-//			Dead ();
-//		} else {
-//
-//		}
+		Debug.Log("FixedUpdate time on PlayerHealth:" + Time.deltaTime);
 	}
+
 	// Update is called once per frame
 	void Update () {
-
-
-
+		// Debug.Log("Update time on PlayerHealth:" + Time.deltaTime);
 	}
 
-	[RPC]	public  void ChangeHealth(int healthChange)
+	[RPC]	public  void ChangeHealth(int amount)
 	{
-		print ("Health Change happens here");
-		health -= healthChange;
-		print (health);
+		print ("Health before change: " + health);
+		health -= amount;
+		print ("Health after change of " + amount + ": " + health);
 		checkDeath ();
 	}
 
 	public void checkDeath()
 	{
-		print ("Inside Check Death");
-		if (health <= 0)
-			print ("Inside If Statement WOOOOOOOOOOOOOOOOOOOOOOOOOOOOo");
-		Dead ();
+		if (health <= 0) Dead ();
 	}
 
 
 	 void Dead()
 	{
-		print ("Supposed to be dead");
+		print ("Died at " + Time.deltaTime + "!");
 
 		if (GetComponent<PhotonView>().instantiationId == 0) {
 			Destroy(gameObject);
-		}
-		else {
+		} else {
 			PhotonNetwork.Destroy(gameObject);
 		}
-
-			
-
-			
-		}
-
-
-
-
-//		NewNetwork other = network.GetComponent<NewNetwork>;
-		//(NewNetwork) network.GetComponent<NewNetwork>;
-		//other.OnPlayerDeath ();
-
-
-
-
+	}
 }

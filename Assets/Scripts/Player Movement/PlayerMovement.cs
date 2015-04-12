@@ -22,21 +22,20 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
-	public static void rotateWith (Rigidbody body, float thisSpeed, bool stopFirst)
+	public static void stop (Rigidbody body)
 	{
-		if (stopFirst) {
-			body.velocity = Vector3.zero; // stop the vehicle
-		}
-
-		body.rotation = Quaternion.Euler (body.rotation.eulerAngles + moveYAxis (thisSpeed));
+		body.velocity = Vector3.zero;
 	}
 
-	public static void rotateWithThreshhold (Rigidbody body, float slowSpeed, float rotateSpeed, bool isTruck)
+	public static void rotateIfMoving (Rigidbody body, float threshHold, float rotateSpeed)
 	{
-		if (body.velocity.magnitude > 0.5f) { // if the vehicle is moving
-			moveWith (body, slowSpeed, isTruck); // slow it down more if you have the gas on
-			rotateWith(body, rotateSpeed, false);
+		if (body.velocity.magnitude > threshHold) { // if the vehicle is moving beyond the threshhold
+			rotate(body, rotateSpeed);		
 		}
+	}
+
+	public static void rotate(Rigidbody body, float thisSpeed) {
+		body.rotation = Quaternion.Euler (body.rotation.eulerAngles + moveYAxis (thisSpeed));
 	}
 	
 	public static Vector3 moveYAxis (float thisSpeed)

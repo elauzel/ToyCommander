@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Shoot : MonoBehaviour
+public class Rockett : MonoBehaviour
 {
 	public Rigidbody projectile;
 	public Transform shotPos;
 	public float shotForce = 5f;
 	public float moveSpeed = 0.5f;
 	
-	
-	void Update ()
+	void FixedUpdate ()
 	{
 		//float h = Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;
 		//float v = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;

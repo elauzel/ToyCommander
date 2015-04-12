@@ -3,16 +3,18 @@ using System.Collections;
 
 public class NewNetwork : Photon.MonoBehaviour {
 	GameObject player;
+	public PlayerType type;
 	
 	
 	// Use this for initialization
 	void Start () {
+		Debug.Log("Start time on NewNetwork:" + Time.deltaTime);
 		PhotonNetwork.ConnectUsingSettings("0.1");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		// Debug.Log("Update time on NewNetwork:" + Time.deltaTime);
 	}
 	
 	void OnGUI()
@@ -33,20 +35,50 @@ public class NewNetwork : Photon.MonoBehaviour {
 	
 	void OnJoinedRoom()
 	{
-		player = PhotonNetwork.Instantiate("Player - Helicopter", new Vector3(2f, 1.5f, 12f), Quaternion.identity, 0);
+		Vector3 location = new Vector3 (2f, 1.5f, 12f);
+		SpawnPlayerAt (location);
+	}
+	
+	void SpawnPlayerAt (Vector3 location)
+	{
+		player = PhotonNetwork.Instantiate ("Player - " + type.ToString(), location, Quaternion.identity, 0);
 		
-		player.GetComponent<HelicopterMovement> ().enabled = true;
+		getPlayerControls ();
+		
 		player.GetComponent<RaycastShooting> ().enabled = true;
 		player.GetComponent<PlayerHealth> ().enabled = true;
 		player.GetComponentInChildren<Camera>().enabled = true;
+	}
+
+	void getPlayerControls ()
+	{
+		switch (type) {
+			case PlayerType.Helicopter:
+				player.GetComponent<HelicopterMovement> ().enabled = true;
+				break;
+			case PlayerType.Plane:
+				player.GetComponent<PlaneMovement> ().enabled = true;
+				break;
+			case PlayerType.Truck:
+				player.GetComponent<TruckMovement> ().enabled = true;
+				break;
+			case PlayerType.Tank:
+				player.GetComponent<TankMovement> ().enabled = true;
+				break;
+			case PlayerType.Racecar:
+				player.GetComponent<RacecarMovement> ().enabled = true;
+				break;
+		}
 	}
 	
 	public void OnPlayerDeath()
 	{
 		PhotonView photonView = PhotonView.Get(this);
 		photonView.RPC("Dead", PhotonTargets.All);
-		
 	}
-	
+
+	public enum PlayerType{
+		Helicopter,Plane,Tank,Racecar,Truck
+	}
 	
 }

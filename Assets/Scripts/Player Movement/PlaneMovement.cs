@@ -31,11 +31,11 @@ public class PlaneMovement : MonoBehaviour {
 	public void InputMovement() {
 		
 		if (Input.GetKey (KeyCode.A)) {
-			PlayerMovement.rotateWith (body, -speedRotation, false);
+			PlayerMovement.rotate (body, -speedRotation);
 		} 
 		
 		if (Input.GetKey (KeyCode.D)) {
-			PlayerMovement.rotateWith (body, speedRotation, false);
+			PlayerMovement.rotate (body, speedRotation);
 		}
 		
 		if (Input.GetKey (KeyCode.Space)) {

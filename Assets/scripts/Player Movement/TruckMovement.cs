@@ -6,7 +6,6 @@ public class TruckMovement : MonoBehaviour {
 	public float speedTurn = 4f;
 	public float speedRotation = 2f;
 	private Rigidbody body;
-	private int slowDownMore;
 
 	// Use this for initialization
 	void Start () {
@@ -27,26 +26,23 @@ public class TruckMovement : MonoBehaviour {
 	
 	// model is rotated 270 degrees from Blender to face the right direction
 	public void InputMovement() {
-		slowDownMore = 1;
 		
 		if (Input.GetKey (KeyCode.W)) {
 			PlayerMovement.moveWith (body, speedGas, true);
-			slowDownMore = 3;
 		}
 		
 		if (Input.GetKey (KeyCode.S)) {
 			PlayerMovement.moveWith (body, -speedGas, true);
-			slowDownMore = 3;
 		}
 		
 		if (Input.GetKey (KeyCode.A)) {
-			// PlayerMovement.rotateWithThreshhold (body, -speedRotation, -speedGas*slowDownMore, true);
-			PlayerMovement.rotateWith(body, -speedRotation, false);
+			PlayerMovement.moveWith (body, -speedGas/25, true); // slow it down the more you have the gas on
+			PlayerMovement.rotateIfMoving(body, 0.5f, -speedRotation);
 		} 
 		
 		if (Input.GetKey (KeyCode.D)) {
-			// PlayerMovement.rotateWithThreshhold (body, speedRotation, -speedGas*slowDownMore, true);
-			PlayerMovement.rotateWith(body, speedRotation, false);
+			PlayerMovement.moveWith (body, -speedGas/25, true); // slow it down the more you have the gas on
+			PlayerMovement.rotateIfMoving(body, 0.5f, speedRotation);
 		}
 		
 		if (Input.GetKey (KeyCode.Space)) {

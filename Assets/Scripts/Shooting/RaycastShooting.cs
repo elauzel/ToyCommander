@@ -42,15 +42,13 @@ public class RaycastShooting : MonoBehaviour {
 	void checkForCollisions ()
 	{
 		if (collision ()) {
-			// A collision was detected please deal with it
-			positionBulletHole ();
-			rotateBulletHole ();
 			placeBulletHole ();
 			print (hit.collider.transform.gameObject.name);
 			try {
 				updateHealth ();
 			}
 			catch {
+				Debug.Log("Couldn't update health!");
 			}
 		}
 	}
@@ -60,23 +58,18 @@ public class RaycastShooting : MonoBehaviour {
 		return Physics.Raycast (firedRay, out hit, Camera.main.farClipPlane);
 	}
 
-	static void positionBulletHole ()
+	void placeBulletHole ()
 	{
 		// We need a variable to hold the position of the prefab
 		// The point of contact with the model is given by the hit.point
-		//Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
-	}
+		Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
 
-	static void rotateBulletHole ()
-	{
 		// We need a variable to hold the rotation of the prefab
 		// The new rotation will be a match between the quad vector forward axis and the hit normal
-		//Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.right, hit.normal);
-	}
+		Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.right, hit.normal);
 
-	static void placeBulletHole ()
-	{
-		//GameObject hole = (GameObject)GameObject.Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation);
+		// GameObject hole = (GameObject)GameObject.Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation);
+		GameObject.Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation);
 	}
 
 	void updateHealth ()

@@ -13,11 +13,9 @@ public class NewNetworkCharacter : Photon.MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if (photonView.isMine) {
-		} 
+		Debug.Log("Update time on NewNetworkCharacter:" + Time.deltaTime);
 
-		else 
-		{
+		if (!photonView.isMine) {
 			transform.position = Vector3.Lerp(transform.position, realPosition, 0.1f); 
 			transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, 0.1f);
 		}
@@ -27,10 +25,7 @@ public class NewNetworkCharacter : Photon.MonoBehaviour {
 		if (stream.isWriting) {
 			stream.SendNext(transform.position);
 			stream.SendNext(transform.rotation);
-
-		} 
-
-		else {
+		} else {
 			realPosition = (Vector3)stream.ReceiveNext();
 			realRotation = (Quaternion)stream.ReceiveNext();
 		}
