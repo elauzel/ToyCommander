@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerHealth : MonoBehaviour {
+public class PlayerHealth : Photon.MonoBehaviour {
 	public int health;
-	public GameObject network;
 
 	// Use this for initialization
 	void Start () {
@@ -38,10 +37,14 @@ public class PlayerHealth : MonoBehaviour {
 	{
 		print ("Died at " + Time.deltaTime + "!");
 
-		if (GetComponent<PhotonView>().instantiationId == 0) {
-			Destroy(gameObject);
-		} else {
-			PhotonNetwork.Destroy(gameObject);
-		}
+		//if (!photonView.isMine) {
+			Destroy (gameObject);
+		//} else {
+			//if (GUI.Button(new Rect(10, 70, 50, 30), "Respawn"))
+			//{
+
+			//}
+		//}
+
 	}
 }

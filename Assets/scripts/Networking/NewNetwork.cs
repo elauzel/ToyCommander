@@ -74,11 +74,7 @@ public class NewNetwork : Photon.MonoBehaviour {
 		}
 	}
 	
-	public void OnPlayerDeath()
-	{
-		PhotonView photonView = PhotonView.Get(this);
-		photonView.RPC("Dead", PhotonTargets.All);
-	}
+
 
 	public enum PlayerType{
 		Helicopter,Plane,Tank,Racecar,Truck
