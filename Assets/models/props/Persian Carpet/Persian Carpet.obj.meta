@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 48213a21814234d4b9fe865c6a29a3a5
+guid: ace0a921d1d9f7c4f951aa7fe08dd08e
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: PersianCarpet
-    100002: //RootNode
-    400000: PersianCarpet
-    400002: //RootNode
+    100000: //RootNode
+    100002: PersianCarpet
+    400000: //RootNode
+    400002: PersianCarpet
     2300000: PersianCarpet
     3300000: PersianCarpet
     4300000: PersianCarpet

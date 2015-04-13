@@ -33,12 +33,10 @@ public class HelicopterMovement : MonoBehaviour {
 		}
 
 		if (Input.GetKey (KeyCode.A)) {
-			PlayerMovement.rotate (body, -speedRotation/3, 'x');
 			PlayerMovement.rotate (body, -speedRotation, 'y');
 		} 
 		
 		if (Input.GetKey (KeyCode.D)) {
-			PlayerMovement.rotate (body, speedRotation/3, 'x');
 			PlayerMovement.rotate (body, speedRotation, 'y');
 		}
 		
