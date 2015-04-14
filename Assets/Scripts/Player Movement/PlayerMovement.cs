@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public static void maintainSpeed(Rigidbody body, float thisSpeed) {
-		if (body.velocity.x < thisSpeed | body.velocity.y < thisSpeed | body.velocity.z < thisSpeed)
+		//if (body.velocity.x < thisSpeed | body.velocity.y < thisSpeed | body.velocity.z < thisSpeed)
 			body.velocity = thisSpeed * body.velocity.normalized;
 	}
 
