@@ -33,19 +33,35 @@ public class PlayerHealth : Photon.MonoBehaviour {
 		if (health <= 0) Dead ();
 	}
 
+	void OnGUI()
+	{
+		if (GetComponent<PhotonView> ().isMine && gameObject.tag == "Player") {
+			if (GUI.Button (new Rect (Screen.width -100, 0 , 100, 40), "Suicide")){
+				Dead ();
+			}
+		}
+
+	}
+
 
 	 void Dead()
 	{
 
+		if (GetComponent<PhotonView> ().isMine) {
+			if (gameObject.tag == "Player"){
+				NewNetwork nn = GameObject.FindObjectOfType<NewNetwork>();
 
+				nn.standbyCamera.SetActive(true);
+
+				//GameObject.Find ("StandbyCamera").SetActive(true);
+				nn.respawnTimer = 3f;
+			}
+		}
 		print ("Died at " + Time.deltaTime + "!");
-
-		//String name = gameObject.name;
-		while ( obj.GetComponent("Body") != null)
-		   
-			
-			obj.gameObject.collider.enabled = false;
-			
+		
+		//while ( obj.GetComponent("Body") != null)
+			//obj.gameObject.collider.enabled = false;
+		PhotonNetwork.Destroy (gameObject);
 
 
 		//Component body = gameObject.GetComponent("Body"); 

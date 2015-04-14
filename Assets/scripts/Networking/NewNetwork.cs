@@ -7,7 +7,9 @@ public class NewNetwork : Photon.MonoBehaviour {
 	public float x = 0;
 	public float y = 0;
 	public float z = 0;
-	
+	public GameObject standbyCamera;
+
+	public float respawnTimer = 0;
 	
 	// Use this for initialization
 	void Start () {
@@ -18,6 +20,14 @@ public class NewNetwork : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Debug.Log("Update time on NewNetwork:" + Time.deltaTime);
+		if (respawnTimer > 0) {
+			respawnTimer -= Time.deltaTime;
+
+			if (respawnTimer <= 0) {
+				Vector3 location = new Vector3 (x, y, z);
+				SpawnPlayerAt (location);
+				}
+		}
 	}
 	
 	void OnGUI()
@@ -45,7 +55,7 @@ public class NewNetwork : Photon.MonoBehaviour {
 	void SpawnPlayerAt (Vector3 location)
 	{
 		player = PhotonNetwork.Instantiate ("Player - " + type.ToString(), location, Quaternion.identity, 0);
-		
+		standbyCamera.SetActive (false);
 		getPlayerControls ();
 		
 		player.GetComponent<RaycastShooting> ().enabled = true;
