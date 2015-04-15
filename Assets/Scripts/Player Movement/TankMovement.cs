@@ -22,6 +22,7 @@ public class TankMovement : MonoBehaviour {
 		InputMovement();
 	}
 
+	// model is rotated 270 degrees from Blender to face the right direction
 	public void InputMovement() {
 
 		if (Input.GetKey (KeyCode.W)) {
@@ -33,13 +34,13 @@ public class TankMovement : MonoBehaviour {
 		}
 		
 		if (Input.GetKey (KeyCode.A)) {
-			PlayerMovement.stop(body);
-			PlayerMovement.rotate (body, -speedRotation, 'y');
+			PlayerMovement.moveWith (body, -speedGas, true); // slow it down the more you have the gas on
+			PlayerMovement.rotate(body, -speedRotation, 'y');
 		} 
 		
 		if (Input.GetKey (KeyCode.D)) {
-			PlayerMovement.stop(body);
-			PlayerMovement.rotate (body, speedRotation, 'y');
+			PlayerMovement.moveWith (body, -speedGas, true); // slow it down the more you have the gas on
+			PlayerMovement.rotate(body, speedRotation, 'y');
 		}
 		
 		if (Input.GetKey (KeyCode.Space)) {

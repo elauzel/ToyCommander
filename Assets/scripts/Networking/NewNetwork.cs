@@ -24,9 +24,8 @@ public class NewNetwork : Photon.MonoBehaviour {
 			respawnTimer -= Time.deltaTime;
 
 			if (respawnTimer <= 0) {
-				Vector3 location = new Vector3 (x, y, z);
-				SpawnPlayerAt (location);
-				}
+				OnJoinedRoom();
+			}
 		}
 	}
 	
@@ -83,8 +82,6 @@ public class NewNetwork : Photon.MonoBehaviour {
 				break;
 		}
 	}
-	
-
 
 	public enum PlayerType{
 		Helicopter,Plane,Tank,Racecar,Truck

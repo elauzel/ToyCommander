@@ -21,7 +21,6 @@ public class TruckMovement : MonoBehaviour {
 		Debug.Log("FixedUpdate time on Truck:" + Time.deltaTime);
 		InputMovement();
 	}
-
 	
 	// model is rotated 270 degrees from Blender to face the right direction
 	public void InputMovement() {
