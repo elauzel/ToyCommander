@@ -80,6 +80,13 @@ public class RaycastShooting : MonoBehaviour {
 	void updateHealth ()
 	{
 		health = hit.collider.transform.gameObject.GetComponent<PlayerHealth> ();
+
+
+		TeamMember tm = hit.collider.transform.gameObject.GetComponent<TeamMember> ();
+		TeamMember myTm = this.GetComponent<TeamMember> ();
+
+		if (//tm == null || tm.teamID == 0 || myTm ==null || myTm.teamID == 0 || 
+		    tm.teamID != myTm.teamID)
 		health.GetComponent<PhotonView> ().RPC ("ChangeHealth", PhotonTargets.All, damagePerBullet);
 	}
 }

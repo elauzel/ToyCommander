@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class PlaneMovement : MonoBehaviour {
+	public float speedGas = 7f;
 	public float speedConstant = 55f;
 	public float speedRotation = 2f;
 	private Rigidbody body;
@@ -10,6 +11,7 @@ public class PlaneMovement : MonoBehaviour {
 	void Start () {
 		Debug.Log("Start time on Plane:" + Time.deltaTime);
 		body = GetComponent<Rigidbody>();
+		accelerate(speedConstant);
 	}
 	
 	// Update is called once per frame
@@ -19,26 +21,24 @@ public class PlaneMovement : MonoBehaviour {
 	
 	void FixedUpdate ()	{
 		Debug.Log("FixedUpdate time on Plane:" + Time.deltaTime);
-		PlayerMovement.moveWith(body, -speedConstant, false);
 		InputMovement();
 	}
 
-	void accelerate() {
-		if (speedConstant < 110) speedConstant++;
-	}
-
-	void decelerate() {
-		if (speedConstant > 55) speedConstant--;
+	void accelerate(float thisSpeed) {
+		rigidbody.AddRelativeForce(Vector3.forward * thisSpeed);
 	}
 	
 	public void InputMovement() {
 
 		if (Input.GetKey (KeyCode.W)) {
-			//accelerate();
+			speedGas++;
+			PlayerMovement.moveWith (body, -speedGas, false);
 		}
 		
 		if (Input.GetKey (KeyCode.S)) {
-			//decelerate();
+			speedGas--;
+			PlayerMovement.moveWith (body, speedGas, false);
+			//PlayerMovement.maintainSpeed (body, speedConstant);
 		}
 		
 		if (Input.GetKey (KeyCode.A)) {
@@ -50,11 +50,11 @@ public class PlaneMovement : MonoBehaviour {
 		}
 		
 		if (Input.GetKey (KeyCode.Space)) {
-			PlayerMovement.floatWith (body, speedConstant);
+			PlayerMovement.floatWith (body, speedGas);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftShift)) {
-			PlayerMovement.floatWith (body, -speedConstant/2);
+			PlayerMovement.floatWith (body, -speedGas/2);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {
