@@ -11,7 +11,7 @@ public class HelicopterSpin : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log("Update time on HelicopterSpin:" + Time.deltaTime);
+		//Debug.Log("Update time on HelicopterSpin:" + Time.deltaTime);
 		transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed*60);
 	}
 }
