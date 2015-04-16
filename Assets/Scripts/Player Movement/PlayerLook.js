@@ -1,5 +1,5 @@
 ﻿@script AddComponentMenu ("Camera-Control/Mouse Look")
-enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
+//enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
 var axes = RotationAxes.MouseXAndY;
 var sensitivityX : float = 15;
 var sensitivityY : float = 15;

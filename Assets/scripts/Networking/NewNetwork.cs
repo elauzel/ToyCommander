@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class NewNetwork : Photon.MonoBehaviour {
 	public PlayerType type;
@@ -8,16 +9,28 @@ public class NewNetwork : Photon.MonoBehaviour {
 	public float z = 0;
 	public float respawnTimer = 0;
 	public GameObject standbyCamera;
+
+	public Text score;
 	
 	private GameObject player;
 	private Vector3 location ;
 	private bool hasPickedTeam = false;
 	private bool joined = false;
 	private int teamID = 0;
-	
+	private int redLivesLeft = 3;
+	private int blueLivesLeft = 3;
+	private bool redWin = false;
+	private bool blueWin = false;
+	private bool changeScore = false;
+	private bool firstSpawn = true;
+	private PhotonView pv;
 	// Use this for initialization
 	void Start () {
 
+		//score = GetComponent<Text>();
+
+		score.text = "Red Team: " + redLivesLeft + "     " + "Blue Team: " + blueLivesLeft;
+		//score.text = "Hellos";
 		location = new Vector3 (x, y, z);
 		Debug.Log("Start time on NewNetwork:" + Time.deltaTime);
 		PhotonNetwork.ConnectUsingSettings("0.1");
@@ -38,6 +51,7 @@ public class NewNetwork : Photon.MonoBehaviour {
 	
 	void OnGUI()
 	{
+
 		if (hasPickedTeam == false && joined == true) {
 			if (GUILayout.Button("Red Team") ) 
 				SpawnPlayerAt(location, 1);			
@@ -51,6 +65,19 @@ public class NewNetwork : Photon.MonoBehaviour {
 
 		if (joined == false)
 		GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+
+		
+		if (redWin == true) {
+			
+			score.text ="Red Team Wins!";
+			
+		}
+		
+		if (blueWin == true) {
+			
+			score.text ="Blue Team Wins!";
+			
+		}
 	}
 	
 	void OnJoinedLobby()
@@ -79,6 +106,16 @@ public class NewNetwork : Photon.MonoBehaviour {
 		hasPickedTeam = true;
 
 		player = PhotonNetwork.Instantiate ("Player - " + type.ToString(), location, Quaternion.identity, 0);
+		print (firstSpawn);
+		if (firstSpawn == false) {
+//			pv = this.GetComponent<PhotonView>();
+//			pv.RPC ("PlayerRespawn", PhotonTargets.AllBuffered, teamID);
+			PlayerRespawn (teamID);
+		} else {
+			firstSpawn = false;
+		}
+
+		//PlayerRespawn (teamID);
 		standbyCamera.SetActive (false);
 
 		getPlayerControls ();
@@ -114,5 +151,42 @@ public class NewNetwork : Photon.MonoBehaviour {
 	public enum PlayerType{
 		Helicopter,Plane,Tank,Racecar,Truck
 	}
-	
+
+	[RPC]
+	void PlayerRespawn(int team)
+	{
+		if (team == 1) {
+			redLivesLeft -= 1;
+			CheckGameWon();
+		} else  {
+			blueLivesLeft -= 1;
+			CheckGameWon();
+		}
+
+		score.text = "Red Team: " + redLivesLeft + "     " + "Blue Team: " + blueLivesLeft;
+	}
+
+	void CheckGameWon()
+	{
+		if (redLivesLeft <= 0) {
+			print ("Red Team Lost");
+			GameWon (1);
+		}
+
+		 if (blueLivesLeft <= 0) {
+			print ("Blue Team Lost");
+			GameWon (2);
+		}
+	}
+
+	void GameWon(int teamDeath)
+	{
+		if (teamDeath == 1) {
+			blueWin = true;
+			//Application.LoadLevel ("Level1");
+		} else {
+			redWin = true;
+			//Application.LoadLevel ("Level1");
+		}
+	}
 }
