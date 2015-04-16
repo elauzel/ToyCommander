@@ -11,7 +11,7 @@ public class PlaneMovement : MonoBehaviour {
 	void Start () {
 		Debug.Log("Start time on Plane:" + Time.deltaTime);
 		body = GetComponent<Rigidbody>();
-		PlayerMovement.moveWith (body, -speedGas, false);
+		PlayerMovement.moveForward (body, -speedGas, false);
 	}
 	
 	// Update is called once per frame
@@ -69,7 +69,7 @@ public class PlaneMovement : MonoBehaviour {
 	void resumeSpeed (float thisSpeed)
 	{
 		PlayerMovement.stop (body);
-		PlayerMovement.moveWith (body, thisSpeed, false);
+		PlayerMovement.moveForward (body, thisSpeed, false);
 	}
 }
 

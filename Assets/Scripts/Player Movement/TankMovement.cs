@@ -26,31 +26,23 @@ public class TankMovement : MonoBehaviour {
 	public void InputMovement() {
 
 		if (Input.GetKey (KeyCode.W)) {
-			PlayerMovement.moveWith (body, speedGas, true);
+			PlayerMovement.moveForward (body, speedGas, true);
 			PlayerMovement.rotate(body, speedRotation/19, 'y'); // fixes veering
 		}
 		
 		if (Input.GetKey (KeyCode.S)) {
-			PlayerMovement.moveWith (body, -speedGas, true);
+			PlayerMovement.moveForward (body, -speedGas, true);
 			PlayerMovement.rotate(body, -speedRotation/19, 'y'); // fixes veering
 		}
 		
 		if (Input.GetKey (KeyCode.A)) {
-			PlayerMovement.moveWith (body, -speedGas, true); // slow it down the more you have the gas on
+			PlayerMovement.moveForward (body, -speedGas, true); // slow it down the more you have the gas on
 			PlayerMovement.rotate(body, -speedRotation, 'y');
 		} 
 		
 		if (Input.GetKey (KeyCode.D)) {
-			PlayerMovement.moveWith (body, -speedGas, true); // slow it down the more you have the gas on
+			PlayerMovement.moveForward (body, -speedGas, true); // slow it down the more you have the gas on
 			PlayerMovement.rotate(body, speedRotation, 'y');
-		}
-		
-		if (Input.GetKey (KeyCode.Space)) {
-			PlayerMovement.floatWith (body, speedGas);
-		}
-		
-		if (Input.GetKey (KeyCode.LeftShift)) {
-			PlayerMovement.floatWith (body, -speedGas/2);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {

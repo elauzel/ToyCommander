@@ -13,12 +13,21 @@ public class PlayerMovement : MonoBehaviour {
 	
 	}
 
-	public static void moveWith (Rigidbody body, float thisSpeed, bool truckOrTank)
+	public static void moveForward (Rigidbody body, float thisSpeed, bool truckOrTank)
 	{
 		if (truckOrTank) {
 			body.AddRelativeForce (Vector3.left * thisSpeed);
 		} else {
 			body.AddRelativeForce (Vector3.back * thisSpeed);
+		}
+	}
+
+	public static void moveLeft (Rigidbody body, float thisSpeed, bool truckOrTank)
+	{
+		if (truckOrTank) {
+			body.AddRelativeForce (Vector3.back * thisSpeed);
+		} else {
+			body.AddRelativeForce (Vector3.left * thisSpeed);
 		}
 	}
 

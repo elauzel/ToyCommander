@@ -25,29 +25,21 @@ public class RacecarMovement : MonoBehaviour {
 	public void InputMovement() {
 		
 		if (Input.GetKey (KeyCode.W)) {
-			PlayerMovement.moveWith (body, speedGas, false);
+			PlayerMovement.moveForward (body, speedGas, false);
 		}
 		
 		if (Input.GetKey (KeyCode.S)) {
-			PlayerMovement.moveWith (body, -speedGas, false);
+			PlayerMovement.moveForward (body, -speedGas, false);
 		}
 		
 		if (Input.GetKey (KeyCode.A)) {
-			PlayerMovement.moveWith (body, -speedGas/25, false); // slow it down the more you have the gas on
+			PlayerMovement.moveForward (body, -speedGas/25, false); // slow it down the more you have the gas on
 			PlayerMovement.rotateIfMoving(body, 0.5f, -speedRotation, 'y');
 		} 
 		
 		if (Input.GetKey (KeyCode.D)) {
-			PlayerMovement.moveWith (body, -speedGas/25, false); // slow it down the more you have the gas on
+			PlayerMovement.moveForward (body, -speedGas/25, false); // slow it down the more you have the gas on
 			PlayerMovement.rotateIfMoving(body, 0.5f, speedRotation, 'y');
-		}
-		
-		if (Input.GetKey (KeyCode.Space)) {
-			PlayerMovement.floatWith (body, speedGas);
-		}
-		
-		if (Input.GetKey (KeyCode.LeftShift)) {
-			PlayerMovement.floatWith (body, -speedGas/2);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {
