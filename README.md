@@ -2,27 +2,20 @@
 
 JAY - scene setup)
 
-1)	Any last additions to Scene 01: game menu (controls, instructions menus)
+1) Test character selection being transferred to level selection
 
-2)	Carrying selection from Scene 03: character select
+2) Place all models for obstacles and items, including door for living room
 
-3)	Carrying selection from make Scene 02: level select
-
+3) Adjust (angular) drag on ground vehicles to reduce drifting / spinning
 
 AARON & JEREMY - coding and testing)
 
-1)	fine-tune movement scripts and place the appropriate script on each model
+1) When vehicles clip something and spin, rotating them doesn't cancel out that spin
 
-2)	find and place models for obstacles and items
+2) Make mouseLook rotate/move helicopter and plane
 
-3)	implement item mechanics (powerups, ammunition, start simple)
+3) Implement item mechanics (powerups, ammunition, start simple)
 
-4)	fine-tune shooting mechanics and projectiles, likely with raycasting (unlimited ammo at first)
+4) Implement GUI overlays for health bars
 
-5)	implement health mechanics and gui overlays for health bars
-
-6)	implement death and respawn mechanics for each level
-
-7)  continue working on network code
-
-8)  create Photon lobby
+5) Continue working on lobby / team
