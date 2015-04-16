@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum PlayerType { Helicopter,Plane,Tank,Racecar,Truck }
+
 public class NewNetwork : Photon.MonoBehaviour {
 	public PlayerType type;
 	public float x = 0;
@@ -109,10 +111,5 @@ public class NewNetwork : Photon.MonoBehaviour {
 				player.GetComponent<RacecarMovement> ().enabled = true;
 				break;
 		}
-	}
-
-	public enum PlayerType{
-		Helicopter,Plane,Tank,Racecar,Truck
-	}
-	
+	}	
 }
