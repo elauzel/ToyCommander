@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlaneMovement : MonoBehaviour {
 	public float speedGas = 7f;
-	public float speedConstant = 55f;
+	public float speedConstant = 7f;
 	public float speedRotation = 2f;
 	private Rigidbody body;
 
@@ -11,7 +11,7 @@ public class PlaneMovement : MonoBehaviour {
 	void Start () {
 		Debug.Log("Start time on Plane:" + Time.deltaTime);
 		body = GetComponent<Rigidbody>();
-		accelerate(speedConstant);
+		PlayerMovement.moveForward (body, -speedGas, false);
 	}
 	
 	// Update is called once per frame
@@ -23,43 +23,53 @@ public class PlaneMovement : MonoBehaviour {
 		Debug.Log("FixedUpdate time on Plane:" + Time.deltaTime);
 		InputMovement();
 	}
-
-	void accelerate(float thisSpeed) {
-		rigidbody.AddRelativeForce(Vector3.forward * thisSpeed);
-	}
 	
 	public void InputMovement() {
 
 		if (Input.GetKey (KeyCode.W)) {
-			speedGas++;
-			PlayerMovement.moveWith (body, -speedGas, false);
+			speedGas+=40;
+			resumeSpeed(-speedGas);
 		}
 		
 		if (Input.GetKey (KeyCode.S)) {
-			speedGas--;
-			PlayerMovement.moveWith (body, speedGas, false);
-			//PlayerMovement.maintainSpeed (body, speedConstant);
+			if (speedGas > speedConstant) {
+				decelerate ();
+			}
 		}
 		
 		if (Input.GetKey (KeyCode.A)) {
 			PlayerMovement.rotate (body, -speedRotation, 'y');
+			resumeSpeed(-speedGas);
 		} 
 		
 		if (Input.GetKey (KeyCode.D)) {
 			PlayerMovement.rotate (body, speedRotation, 'y');
+			resumeSpeed(-speedGas);
 		}
 		
 		if (Input.GetKey (KeyCode.Space)) {
-			PlayerMovement.floatWith (body, speedGas);
+			PlayerMovement.floatWith (body, speedGas/15);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftShift)) {
-			PlayerMovement.floatWith (body, -speedGas/2);
+			PlayerMovement.floatWith (body, -speedGas/15);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			PlayerMovement.reposition (body);
 		}
+	}
+
+	void decelerate ()
+	{
+		speedGas-=40;
+		resumeSpeed (-speedGas);
+	}
+
+	void resumeSpeed (float thisSpeed)
+	{
+		PlayerMovement.stop (body);
+		PlayerMovement.moveForward (body, thisSpeed, false);
 	}
 }
 

@@ -25,11 +25,11 @@ public class HelicopterMovement : MonoBehaviour {
 	public void InputMovement() {
 
 		if (Input.GetKey (KeyCode.W)) {
-			PlayerMovement.moveWith (body, speedGas, false);
+			PlayerMovement.moveForward (body, speedGas, false);
 		}
 
 		if (Input.GetKey (KeyCode.S)) {
-			PlayerMovement.moveWith (body, -speedGas, false);
+			PlayerMovement.moveForward (body, -speedGas, false);
 		}
 
 		if (Input.GetKey (KeyCode.A)) {
