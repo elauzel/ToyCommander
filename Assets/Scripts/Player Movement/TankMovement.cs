@@ -27,10 +27,12 @@ public class TankMovement : MonoBehaviour {
 
 		if (Input.GetKey (KeyCode.W)) {
 			PlayerMovement.moveWith (body, speedGas, true);
+			PlayerMovement.rotate(body, speedRotation/19, 'y'); // fixes veering
 		}
 		
 		if (Input.GetKey (KeyCode.S)) {
 			PlayerMovement.moveWith (body, -speedGas, true);
+			PlayerMovement.rotate(body, -speedRotation/19, 'y'); // fixes veering
 		}
 		
 		if (Input.GetKey (KeyCode.A)) {
