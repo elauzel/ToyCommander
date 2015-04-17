@@ -12,6 +12,11 @@ var vehicle_counter = 1;
 // 4 = heli
 // 5 = racecar
 
+//connects to PersistentGameIdentifier object
+function Start () {
+ var persistGameID : GameObject = GameObject.Find("PesistentGameIdentifier");
+ }
+
 function  moveLeft() {
 	if (originX > -50) {
 		originX -= 15;
@@ -27,4 +32,8 @@ function moveRight() {
 		transform.position = Vector3(originX,originY,originZ);
 		vehicle_counter -= 1;
 	}
+}
+//updates static variable in PersistentGameIdentifier object
+function Update() {
+DontDestroyObject.CharacterSelected = vehicle_counter;
 }
