@@ -1,6 +1,12 @@
 ﻿@script AddComponentMenu ("Camera-Control/Mouse Look")
-//enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
+private enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
+private enum AerialVehicle { yes = 0, no = 1 }
+
+var player : GameObject;
+
+var aerial = AerialVehicle.yes;
 var axes = RotationAxes.MouseXAndY;
+
 var sensitivityX : float = 15;
 var sensitivityY : float = 15;
 
@@ -17,30 +23,17 @@ private var originalRotation : Quaternion;
 
 function Update () {
 	if (axes == RotationAxes.MouseXAndY) {
-		rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-		rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-		
-		rotationX = ClampAngle (rotationX, minimumX, maximumX);
-		rotationY = ClampAngle (rotationY, minimumY, maximumY);
-		
-		var xQuaternion = Quaternion.AngleAxis (rotationX, Vector3.up);
-		var yQuaternion = Quaternion.AngleAxis (rotationY, Vector3.left);
-		
-		transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+		xQuaternion = clampInput('x');
+		yQuaternion = clampInput('y');
+		transformRotation(xQuaternion * yQuaternion);
 	}
 	else if (axes == RotationAxes.MouseX) {
-		rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-		rotationX = ClampAngle (rotationX, minimumX, maximumX);
-		
-		xQuaternion = Quaternion.AngleAxis (rotationX, Vector3.up);
-		transform.localRotation = originalRotation * xQuaternion;
+		xQuaternion = clampInput('x');
+		transformRotation(xQuaternion);
 	}
 	else {
-		rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-		rotationY = ClampAngle (rotationY, minimumY, maximumY);
-		
-		yQuaternion = Quaternion.AngleAxis (rotationY, Vector3.left);
-		transform.localRotation = originalRotation * yQuaternion;
+		yQuaternion = clampInput('y');
+		transformRotation(yQuaternion);
 	}
 }
 
@@ -50,10 +43,33 @@ function Start () {
 	originalRotation = transform.localRotation;
 }
 
+function clampInput(axis : String) : Quaternion {
+	if (axis == 'x') {
+		rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+		rotationX = ClampAngle (rotationX, minimumX, maximumX);
+		return Quaternion.AngleAxis (rotationX, Vector3.up);
+	} else {
+		rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+		rotationY = ClampAngle (rotationY, minimumY, maximumY);
+		return Quaternion.AngleAxis (rotationY, Vector3.left);
+	}
+}
+
 static function ClampAngle (angle : float, min : float, max : float) : float {
 	if (angle < -360.0)
 		angle += 360.0;
 	if (angle > 360.0)
 		angle -= 360.0;
 	return Mathf.Clamp (angle, min, max);
+}
+
+function transformRotation(quatern : Quaternion) {
+	transform.localRotation = originalRotation * quatern;
+	transformIfAerial(quatern);
+}
+
+function transformIfAerial(quatern : Quaternion) {
+	if (AerialVehicle.yes) {
+		player.rigidbody.AddRelativeTorque(Vector3(rotationX * Input.GetAxis ("Horizontal"), rotationY * Input.GetAxis ("Vertical"), 0));
+	}
 }
