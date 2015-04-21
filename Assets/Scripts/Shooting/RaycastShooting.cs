@@ -6,6 +6,7 @@ public class RaycastShooting : MonoBehaviour {
 	public GameObject bulletHolePrefab; // bullet hole prefab to instantiate
 	public PlayerHealth health;
 	public int damagePerBullet = 100;
+
 	//public GameObject player;
 	private Transform shootPos;
 
@@ -85,8 +86,9 @@ public class RaycastShooting : MonoBehaviour {
 		TeamMember tm = hit.collider.transform.gameObject.GetComponent<TeamMember> ();
 		TeamMember myTm = this.GetComponent<TeamMember> ();
 
-		if (//tm == null || tm.teamID == 0 || myTm ==null || myTm.teamID == 0 || 
+
+		if (tm == null || tm.teamID == 0 || myTm ==null || myTm.teamID == 0 || 
 		    tm.teamID != myTm.teamID)
-		health.GetComponent<PhotonView> ().RPC ("ChangeHealth", PhotonTargets.All, damagePerBullet);
+			health.GetComponent<PhotonView> ().RPC ("ChangeHealth", PhotonTargets.AllBuffered, damagePerBullet);
 	}
 }

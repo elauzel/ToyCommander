@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class PlayerHealth : Photon.MonoBehaviour {
 	public int health;
 	public GameObject obj;
+
+	//public NewNetwork player;
 
 	// Use this for initialization
 	void Start () {
@@ -46,10 +49,19 @@ public class PlayerHealth : Photon.MonoBehaviour {
 
 	 void Dead()
 	{
+		Vector3 location;
+		int x = 0, y = 0, z = 0;
+		location = new Vector3 (x, y, z);
+		TeamMember tm = GameObject.FindObjectOfType<TeamMember>();
+		int team = tm.teamID;
 
 		if (GetComponent<PhotonView> ().isMine) {
 			if (gameObject.tag == "Player"){
 				NewNetwork nn = GameObject.FindObjectOfType<NewNetwork>();
+
+
+
+			
 
 				nn.standbyCamera.SetActive(true);
 
@@ -57,6 +69,9 @@ public class PlayerHealth : Photon.MonoBehaviour {
 				nn.respawnTimer = 3f;
 			}
 		}
+		//player = this.GetComponent<NewNetwork> ();
+
+		//player.GetComponent<PhotonView> ().RPC ("SpawnPlayerAt", PhotonTargets.All,location, team);
 		print ("Died at " + Time.deltaTime + "!");
 		
 		//while ( obj.GetComponent("Body") != null)
