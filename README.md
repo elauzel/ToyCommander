@@ -2,11 +2,9 @@
 
 JAY - scene setup)
 
-1) Test character selection being transferred to level selection
+1) Finish character selection being transferred to other scenes
 
-2) Place all models for obstacles and items, including door for living room
-
-3) Adjust (angular) drag on ground vehicles to reduce drifting / spinning
+2) Investigate how to combine character select and level select into the same scene as an actual level
 
 AARON & JEREMY - coding and testing)
 
@@ -16,6 +14,4 @@ AARON & JEREMY - coding and testing)
 
 3) Implement item mechanics (powerups, ammunition, start simple)
 
-4) Implement GUI overlays for health bars
-
-5) Continue working on lobby / team
+4) Implement GUI overlays for health bars and ammunition
