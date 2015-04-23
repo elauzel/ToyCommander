@@ -53,6 +53,25 @@ public class PlayerMovement : MonoBehaviour {
 		body.rotation = Quaternion.Euler (body.rotation.eulerAngles + newAngles);
 	}
 
+	public static void torque(Rigidbody body, float thisSpeed, char axis) {
+		float speed = 0;
+		Vector3 torque = Vector3.zero;
+		switch (axis) {
+		case 'x':
+			speed = thisSpeed * Input.GetAxis ("Horizontal");
+			torque = moveXAxis (speed);
+			break;
+		case 'y':
+			speed = thisSpeed * Input.GetAxis ("Vertical");
+			torque = moveYAxis (speed);
+			break;
+		default:
+			Debug.Log("Invalid axis!");
+			break;
+		}
+		body.AddRelativeTorque(torque);
+	}
+
 	static Vector3 getAngles (float thisSpeed, char axis)
 	{
 		Vector3 angles = Vector3.zero;
@@ -70,7 +89,6 @@ public class PlayerMovement : MonoBehaviour {
 			Debug.Log("Invalid axis!");
 			break;
 		}
-
 		return angles;
 	}
 	
