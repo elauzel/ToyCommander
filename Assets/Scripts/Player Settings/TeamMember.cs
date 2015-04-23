@@ -19,23 +19,23 @@ public class TeamMember : Photon.MonoBehaviour {
 	}
 
 
-	[RPC]
-	void ChangeScore(int team)
-	{
-		if (team == 1) {
-			redLivesLeft -=1;
-		} else {
-			blueLivesLeft -=1;
-		}
-
-		score.text = "Red Team: " + redLivesLeft + "     " + "Blue Team: " + blueLivesLeft;
-	}
-
-
-
-	void OnGUI()
-	{
-		
-
-	}
+//	[RPC]
+//	void ChangeScore(int team)
+//	{
+//		if (team == 1) {
+//			redLivesLeft -=1;
+//		} else {
+//			blueLivesLeft -=1;
+//		}
+//
+//		score.text = "Red Team: " + redLivesLeft + "     " + "Blue Team: " + blueLivesLeft;
+//	}
+//
+//
+//
+//	void OnGUI()
+//	{
+//		
+//
+//	}
 }

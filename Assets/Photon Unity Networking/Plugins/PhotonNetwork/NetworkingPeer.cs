@@ -1575,9 +1575,9 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
                 if (this.IsInitialConnect)
                 {
                     Debug.LogWarning(statusCode + " while connecting to: " + this.ServerAddress + ". Check if the server is available.");
-
                     cause = (DisconnectCause)statusCode;
                     SendMonoMessage(PhotonNetworkingMessage.OnFailedToConnectToPhoton, cause);
+
                 }
                 else
                 {
@@ -1590,6 +1590,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
                 }
 
                 this.Disconnect();
+			PhotonNetwork.ConnectUsingSettings("0.1");
                 break;
 
             case StatusCode.SendError:

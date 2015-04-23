@@ -12,24 +12,62 @@ public class RaycastShooting : MonoBehaviour {
 
 	private Ray firedRay; // the ray that will be shot
 	private RaycastHit hit; // variable to hold the object that is hit
+	private bool canShoot = true;
+	public int bullets = 32;
+	public float reloadTimer = 0;
+	private bool reload = false;
 
 
-	// Use this for initialization
-	void Start () {
-		Debug.Log("Start time on RaycastShooting:" + Time.deltaTime);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+// Use this for initialization
+void Start () {
+}
+// Update is called once per frame
+void FixedUpdate () 
+	{
 		if (firing ()) {
-			centerScreenAndFire ();
-			checkForCollisions ();
+			if (canShoot && bullets > 0) {
+				print ("Shooting");
+				centerScreenAndFire ();
+				checkForCollisions ();
+				bullets -= 1;
+				print (bullets);
+				canShoot = false;
+				StartCoroutine (Wait (0.1F));
+
+			}
 		}
 	}
 
+	void Update()
+	{
+		print (reloadTimer);
+		if (reloadTimer > 0) {
+			reloadTimer -= Time.deltaTime;
+		
+			if (reloadTimer<=0){
+				reload = true;
+				bullets = 32;
+				reloadTimer = 0;
+				print (bullets);
+			}
+		} 
+
+		if (bullets <= 0 && reloadTimer <= 0) {
+			reloadTimer = 5;
+		}
+		
+	}
+	
+	IEnumerator Wait (float waitTime) {
+		yield return new WaitForSeconds(waitTime);
+		canShoot = true;
+	}
+
+	
 	static bool firing ()
 	{
-		return Input.GetButtonDown ("Fire1");
+		return Input.GetButton ("Fire1");
 	}
 
 	void centerScreenAndFire ()
