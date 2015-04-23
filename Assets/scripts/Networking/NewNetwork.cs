@@ -29,9 +29,6 @@ public class NewNetwork : Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-		//score = GetComponent<Text>();
-		
 		score.text = "Red Team: " + redLivesLeft + "     " + "Blue Team: " + blueLivesLeft;
 		location = new Vector3 (x, y, z);
 		Debug.Log("Start time on NewNetwork:" + Time.deltaTime);
@@ -40,19 +37,16 @@ public class NewNetwork : Photon.MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// Debug.Log("Update time on NewNetwork:" + Time.deltaTime);
+
+
 		if (respawnTimer > 0) {
 			respawnTimer -= Time.deltaTime;
 			
 			if (respawnTimer <= 0) {
 				OnJoinedRoom();
 				SpawnPlayerAt(location, teamID);
-
-				//if (photonView.isMine){
-					//photonView.RPC("ChangeColorTo", PhotonTargets.OthersBuffered, color);
-				//this.photonView.RPC ( "SpawnPlayerAt", PhotonTargets.AllBuffered,location, teamID);
+				PhotonView photonView = this.photonView;
 				}
-
 				print (test);
 			}
 		}
@@ -60,7 +54,6 @@ public class NewNetwork : Photon.MonoBehaviour {
 	
 	void OnGUI()
 	{
-		
 		if (hasPickedTeam == false && joined == true) {
 			if (GUILayout.Button("Red Team") ) 
 				SpawnPlayerAt(location, 1);			
@@ -74,18 +67,13 @@ public class NewNetwork : Photon.MonoBehaviour {
 		
 		if (joined == false)
 			GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
-		
-		
+
 		if (redWin == true) {
-			
-			//score.text ="Red Team Wins!";
-			
+			score.text ="Red Team Wins!";
 		}
 		
 		if (blueWin == true) {
-			
-			//score.text ="Blue Team Wins!";
-			
+			score.text ="Blue Team Wins!";
 		}
 	}
 	
@@ -104,8 +92,6 @@ public class NewNetwork : Photon.MonoBehaviour {
 	void OnJoinedRoom()
 	{
 		location = new Vector3 (x, y, z);
-		//Vector3 location = new Vector3 (x, y, z);
-		//SpawnPlayerAt (location);
 	}
 	
 	void SpawnPlayerAt (Vector3 location, int teamID)
@@ -118,23 +104,13 @@ public class NewNetwork : Photon.MonoBehaviour {
 
 		player = PhotonNetwork.Instantiate ("Player - " + type.ToString(), location, Quaternion.identity, 0);
 
-		//pv = player.GetPhotonView();
-		pv = player.GetComponent<PhotonView>();
-
 		print (firstSpawn);
 		if (firstSpawn == false) {
-			//			pv = this.GetComponent<PhotonView>();
-			//			pv.RPC ("PlayerRespawn", PhotonTargets.AllBuffered, teamID);
-
-
-
-			//pv.RPC ( "PlayerRespawn", PhotonTargets.AllBuffered, teamID);
-			//player.GetComponent<PhotonView> ().RPC ("PlayerRespawn", PhotonTargets.AllBuffered, teamID);
-		PlayerRespawn (teamID);
+			photonView.RPC("PlayerRespawn",PhotonTargets.AllBuffered, teamID);
 		} else {
 			firstSpawn = false;
 		}
-		
+
 		//PlayerRespawn (teamID);
 		standbyCamera.SetActive (false);
 		
@@ -174,17 +150,11 @@ public class NewNetwork : Photon.MonoBehaviour {
 	
 	[RPC] public void PlayerRespawn(int team)
 	{
-		PhotonView[] nViews = pv.GetComponentsInChildren<PhotonView>();
-		//nViews[0].viewID = id1;
-
 		if (team == 1) {
 			redLivesLeft -= 1;
-			//player.GetComponent<PhotonView> ().RPC ("ChangeScore", PhotonTargets.AllBuffered, 1);
 			CheckGameWon();
 		} else  {
 			blueLivesLeft -= 1;
-
-			//player.GetComponent<PhotonView> ().RPC ("ChangeScore", PhotonTargets.AllBuffered, 2);
 			CheckGameWon();
 		}
 		
