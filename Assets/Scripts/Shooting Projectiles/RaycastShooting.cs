@@ -5,7 +5,7 @@ public class RaycastShooting : MonoBehaviour {
 
 	public GameObject bulletHolePrefab; // bullet hole prefab to instantiate
 	public PlayerHealth health;
-	public int damagePerBullet = 100;
+	public int damagePerBullet = 10;
 
 	//public GameObject player;
 	private Transform shootPos;
@@ -16,6 +16,9 @@ public class RaycastShooting : MonoBehaviour {
 	public int bullets = 32;
 	public float reloadTimer = 0;
 	private bool reload = false;
+	private GameObject AmmoBox;
+	private Vector3 position;
+	public int totalBullets = 160;
 
 
 
@@ -26,7 +29,7 @@ void Start () {
 void FixedUpdate () 
 	{
 		if (firing ()) {
-			if (canShoot && bullets > 0) {
+			if (canShoot && bullets > 0 && totalBullets > 0) {
 				print ("Shooting");
 				centerScreenAndFire ();
 				checkForCollisions ();
@@ -47,6 +50,7 @@ void FixedUpdate ()
 		
 			if (reloadTimer<=0){
 				reload = true;
+				totalBullets -= 32;
 				bullets = 32;
 				reloadTimer = 0;
 				print (bullets);
@@ -129,4 +133,25 @@ void FixedUpdate ()
 		    tm.teamID != myTm.teamID)
 			health.GetComponent<PhotonView> ().RPC ("ChangeHealth", PhotonTargets.AllBuffered, damagePerBullet);
 	}
+
+	void OnCollisionEnter(Collision collision) 
+ 	{
+ 		AmmoBox = collision.gameObject;
+
+ 		
+    	if(AmmoBox.tag == "AmmoBox"){
+    		PhotonNetwork.Destroy(AmmoBox);
+    		position = AmmoBox.transform.position;
+			totalBullets = 160;
+    		Invoke("ItemReinstantiate", 5.0f);
+    	}
+    		
+ 	}
+
+ 	void ItemReinstantiate ()
+ 	{
+
+ 		PhotonNetwork.Instantiate("AmmoBox", position, Quaternion.identity,0);
+ 		print ("Item has been Instantiated");
+ 	}
 }
