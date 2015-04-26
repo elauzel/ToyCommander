@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Rockett : MonoBehaviour
+public class Launch : MonoBehaviour
 {
 	public Rigidbody projectile;
 	public Transform shotPos;

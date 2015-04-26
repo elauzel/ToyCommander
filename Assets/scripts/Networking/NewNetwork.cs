@@ -13,23 +13,25 @@ public class NewNetwork : Photon.MonoBehaviour {
 	
 	private GameObject player;
 	private Vector3 location ;
-	private PhotonView pv;
 	private bool hasPickedTeam = false;
 	private bool joined = false;
 	private bool redWin = false;
 	private bool blueWin = false;
-	private bool changeScore = false;
+	//private bool changeScore = false;
 	private bool firstSpawn = true;
 	private int teamID = 0;
 	private int redLivesLeft = 3;
 	private int blueLivesLeft = 3;
-	private int test = 0;
-
+	
+	public enum PlayerType {
+		Helicopter,Plane,Tank,Racecar,Truck
+	}
+	
 	// Use this for initialization
 	void Start () {
+		Debug.Log("Start time on NewNetwork:" + Time.deltaTime);
 		score.text = "Red Team: " + redLivesLeft + "     " + "Blue Team: " + blueLivesLeft;
 		location = new Vector3 (x, y, z);
-		Debug.Log("Start time on NewNetwork:" + Time.deltaTime);
 		PhotonNetwork.ConnectUsingSettings("0.1");
 	}
 	
@@ -40,95 +42,35 @@ public class NewNetwork : Photon.MonoBehaviour {
 			SpawnIfReady ();
 		}
 	}
-
+	
 	void SpawnIfReady() {
 		if (respawnTimer <= 0) {
 			OnJoinedRoom();
-			SpawnPlayerAt(location, teamID);
-			PhotonView photonView = this.photonView;
-		}
-		print (test);
-	}
-	
-	void OnGUI() {
-		if (hasPickedTeam == false && joined == true) {
-			SpawnOnTeam();
-		}
-		
-		if (joined == false)
-			GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
-
-		if (redWin == true) {
-			score.text ="Red Team Wins!";
-		}
-		
-		if (blueWin == true) {
-			score.text ="Blue Team Wins!";
+			SpawnForTeam(teamID);
 		}
 	}
-
-	void SpawnOnTeam() {
-		if (GUILayout.Button("Red Team") ) 
-			SpawnPlayerAt(location, 1);			
-		
-		if (GUILayout.Button("Blue Team") ) 
-			SpawnPlayerAt(location, 2);
-		
-		if (GUILayout.Button("Random") ) 
-			SpawnPlayerAt(location, Random.Range(1,3));
-	}
 	
-	void OnJoinedLobby() {
-		joined = true;
-		PhotonNetwork.JoinRandomRoom();
-	}
-	
-	void OnPhotonRandomJoinFailed() {
-		Debug.Log("Can't join random room!");
-		PhotonNetwork.CreateRoom(null);
-	} 
-	
+	// This must stay this name
 	void OnJoinedRoom() {
 		location = new Vector3 (x, y, z);
 	}
 	
-	void SpawnPlayerAt (Vector3 location, int teamID) {
-		test +=1;
-
-		SetTeamAndSpawn ();
+	void SpawnForTeam (int teamID) {
+		SetAndPick(teamID);
+		SpawnPlayer ();
 		CheckFirstSpawn ();
-
-		//PlayerRespawn (teamID);
+		
 		standbyCamera.SetActive (false);
-
-		GetPlayerControls ();
-		GetPlayerComponents();
+		
+		GetControlsAndComponents();
 	}
 
-	void SetTeamAndSpawn() {
+	void SetAndPick(int teamID) {
 		this.teamID = teamID;
 		hasPickedTeam = true;
-		player = PhotonNetwork.Instantiate ("Player - " + type.ToString(), location, Quaternion.identity, 0);
 	}
 
-	void CheckFirstSpawn() {
-		print (firstSpawn);
-		if (firstSpawn == false) {
-			photonView.RPC("PlayerRespawn",PhotonTargets.AllBuffered, teamID);
-		} else {
-			firstSpawn = false;
-		}
-	}
-
-	void GetPlayerComponents() {
-		player.GetComponent<RaycastShooting> ().enabled = true;
-		player.GetComponent<PlayerHealth> ().enabled = true;
-		player.transform.FindChild ("Main Camera").gameObject.SetActive (true);
-		player.GetComponentInChildren<Camera> ().enabled = true;
-		player.GetComponent<PhotonView> ().RPC ("SetTeamID", PhotonTargets.AllBuffered, teamID);
-	}
-
-	void GetPlayerControls () {
+	void GetControlsAndComponents () {
 		switch (type) {
 		case PlayerType.Helicopter:
 			player.GetComponent<HelicopterMovement> ().enabled = true;
@@ -146,10 +88,66 @@ public class NewNetwork : Photon.MonoBehaviour {
 			player.GetComponent<RacecarMovement> ().enabled = true;
 			break;
 		}
+
+		player.GetComponent<RaycastShooting> ().enabled = true;
+		player.GetComponent<PlayerHealth> ().enabled = true;
+		player.transform.FindChild ("Main Camera").gameObject.SetActive (true);
+		player.GetComponentInChildren<Camera> ().enabled = true;
+		player.GetComponent<PhotonView> ().RPC ("SetTeamID", PhotonTargets.AllBuffered, teamID);
 	}
 	
-	public enum PlayerType {
-		Helicopter,Plane,Tank,Racecar,Truck
+	void SpawnPlayer() {
+		player = PhotonNetwork.Instantiate ("Player - " + type.ToString(), location, Quaternion.identity, 0);
+	}
+	
+	void CheckFirstSpawn() {
+		print (firstSpawn);
+		if (firstSpawn == false) {
+			player.GetComponent<PhotonView> ().RPC("PlayerRespawn",PhotonTargets.AllBuffered, teamID);
+		} else {
+			firstSpawn = false;
+		}
+	}
+
+	// This must stay this name
+	void OnGUI() {
+		if (hasPickedTeam == false && joined == true) {
+			ShowTeamButtons();
+		}
+		
+		if (joined == false)
+			GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+		
+		if (redWin == true) {
+			score.text ="Red Team Wins!";
+		}
+		
+		if (blueWin == true) {
+			score.text ="Blue Team Wins!";
+		}
+	}
+	
+	void ShowTeamButtons() {
+		if (GUILayout.Button("Red Team") ) 
+			SpawnForTeam(1);			
+		
+		if (GUILayout.Button("Blue Team") ) 
+			SpawnForTeam(2);
+		
+		if (GUILayout.Button("Random") ) 
+			SpawnForTeam(Random.Range(1,3));
+	}
+
+	// This must stay this name
+	void OnJoinedLobby() {
+		joined = true;
+		PhotonNetwork.JoinRandomRoom();
+	}
+
+	// This must stay this name
+	void OnPhotonRandomJoinFailed() {
+		Debug.Log("Can't join random room!");
+		PhotonNetwork.CreateRoom(null);
 	}
 	
 	[RPC] public void PlayerRespawn(int team) {
@@ -157,7 +155,7 @@ public class NewNetwork : Photon.MonoBehaviour {
 		CheckForWinner();
 		score.text = "Red Team: " + redLivesLeft + "     " + "Blue Team: " + blueLivesLeft;
 	}
-
+	
 	void DecrementLivesFor(int team) {
 		if (team == 1) {
 			redLivesLeft -= 1;
@@ -184,6 +182,5 @@ public class NewNetwork : Photon.MonoBehaviour {
 		} else {
 			redWin = true;
 		}
-		//Application.LoadLevel ("Level1");
 	}
 }
