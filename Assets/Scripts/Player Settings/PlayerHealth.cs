@@ -69,7 +69,7 @@ public class PlayerHealth : Photon.MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		healthBox = collision.gameObject;
 
-		if(healthBox.tag == "healthBox"){
+		if(healthBox.tag == "Powerup - HealthBox"){
 			PhotonNetwork.Destroy(healthBox);
 			position = healthBox.transform.position;
 			health = 100;

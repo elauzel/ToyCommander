@@ -132,7 +132,7 @@ public class RaycastShooting : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		AmmoBox = collision.gameObject;
 
-		if(AmmoBox.tag == "AmmoBox"){
+		if(AmmoBox.tag == "Powerup - AmmoBox"){
 			PhotonNetwork.Destroy(AmmoBox);
 			position = AmmoBox.transform.position;
 			totalBullets = 160;
