@@ -132,7 +132,7 @@ public class RaycastShooting : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		AmmoBox = collision.gameObject;
 
-		if(AmmoBox.tag == "Powerup - AmmoBox"){
+		if(AmmoBox.tag == "AmmoBox"){
 			PhotonNetwork.Destroy(AmmoBox);
 			position = AmmoBox.transform.position;
 			totalBullets = 160;
@@ -141,7 +141,7 @@ public class RaycastShooting : MonoBehaviour {
 	}
 	
 	void ItemReinstantiate () {		
-		PhotonNetwork.Instantiate("AmmoBox", position, Quaternion.identity,0);
+		PhotonNetwork.Instantiate("Powerup - AmmoBox", position, Quaternion.identity,0);
 		print ("Item has been Instantiated");
 	}
 }
