@@ -5,20 +5,52 @@ public class RaycastShooting : MonoBehaviour {
 
 	public GameObject bulletHolePrefab;
 	public PlayerHealth health;
+<<<<<<< HEAD
 	public float reloadTimer = 0;
 	public int damagePerBullet = 100;
 	public int bullets = 32;
+=======
+	public int damagePerBullet = 10;
+>>>>>>> origin/Aaron
 
 	private Transform shootPos;	
 	private RaycastHit hit; // variable to hold the object that is hit
 	private Ray firedRay; // the ray that will be shot
 	private bool canShoot = true;
+<<<<<<< HEAD
 	//private bool reload = false;
+=======
+	public int bullets = 32;
+	public float reloadTimer = 0;
+	private bool reload = false;
+	private GameObject AmmoBox;
+	private Vector3 position;
+	public int totalBullets = 160;
+
+>>>>>>> origin/Aaron
 
 	// Use this for initialization
 	void Start () {
 
+<<<<<<< HEAD
 	}
+=======
+// Use this for initialization
+void Start () {
+}
+// Update is called once per frame
+void FixedUpdate () 
+	{
+		if (firing ()) {
+			if (canShoot && bullets > 0 && totalBullets > 0) {
+				print ("Shooting");
+				centerScreenAndFire ();
+				checkForCollisions ();
+				bullets -= 1;
+				print (bullets);
+				canShoot = false;
+				StartCoroutine (Wait (0.1F));
+>>>>>>> origin/Aaron
 
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -31,7 +63,18 @@ public class RaycastShooting : MonoBehaviour {
 		print ("Time to reload:" + reloadTimer);
 		if (reloadTimer > 0) {
 			reloadTimer -= Time.deltaTime;
+<<<<<<< HEAD
 			RespawnIfAble ();
+=======
+		
+			if (reloadTimer<=0){
+				reload = true;
+				totalBullets -= 32;
+				bullets = 32;
+				reloadTimer = 0;
+				print (bullets);
+			}
+>>>>>>> origin/Aaron
 		} 
 		
 		if (bullets <= 0 && reloadTimer <= 0) {
@@ -116,9 +159,33 @@ public class RaycastShooting : MonoBehaviour {
 		    tm.teamID != myTm.teamID)
 			health.GetComponent<PhotonView> ().RPC ("ChangeHealth", PhotonTargets.AllBuffered, damagePerBullet);
 	}
+<<<<<<< HEAD
 	
 	IEnumerator Wait (float waitTime) {
 		yield return new WaitForSeconds(waitTime);
 		canShoot = true;
 	}
+=======
+
+	void OnCollisionEnter(Collision collision) 
+ 	{
+ 		AmmoBox = collision.gameObject;
+
+ 		
+    	if(AmmoBox.tag == "AmmoBox"){
+    		PhotonNetwork.Destroy(AmmoBox);
+    		position = AmmoBox.transform.position;
+			totalBullets = 160;
+    		Invoke("ItemReinstantiate", 5.0f);
+    	}
+    		
+ 	}
+
+ 	void ItemReinstantiate ()
+ 	{
+
+ 		PhotonNetwork.Instantiate("AmmoBox", position, Quaternion.identity,0);
+ 		print ("Item has been Instantiated");
+ 	}
+>>>>>>> origin/Aaron
 }
