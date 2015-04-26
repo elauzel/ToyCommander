@@ -58,6 +58,7 @@ public class RaycastShooting : MonoBehaviour {
 		if (canShoot && bullets > 0 && totalBullets > 0) {
 			print ("Shooting");
 			centerScreenAndFire ();
+			audio.Play();
 			checkForCollisions ();
 			bullets -= 1;
 			canShoot = false;
@@ -67,7 +68,9 @@ public class RaycastShooting : MonoBehaviour {
 	}
 	
 	IEnumerator Wait (float waitTime) {
+
 		yield return new WaitForSeconds(waitTime);
+		audio.Stop ();
 		canShoot = true;
 	}
 	
