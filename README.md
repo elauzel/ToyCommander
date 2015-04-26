@@ -1,17 +1,33 @@
 # ToyCommander
 
-JAY - scene setup)
+===== Critical
 
-1) Finish character selection being transferred to other scenes
+1) Test item mechanics via GUI updates (powerups and ammunition)
 
-2) Investigate how to combine character select and level select into the same scene as an actual level
+2) Access UI through PlayerHealth
 
-AARON & JEREMY - coding and testing)
+3) Get team score to decrement
+
+4) Create menu for choosing character and level in Everything scene
+
+5) Place more powerups in the scene
+
+6) Add a missile weapon
+
+7) Add tracer bullets to machine gun
+
+8) Add background music to scene
+
+9) Add SFX to weapons and powerups
+
+10) Put lifespan on bullet holes
+
+===== Optional
 
 1) When vehicles clip something and spin, rotating them doesn't cancel out that spin
 
 2) Make mouseLook rotate/move helicopter and plane
 
-3) Implement item mechanics (powerups, ammunition, start simple)
+3) Improve GUI overlay location for ammunition
 
-4) Implement GUI overlays for health bars and ammunition
+4) Add animations to players
