@@ -2,18 +2,19 @@
 using System.Collections;
 
 public class RaycastShooting : MonoBehaviour {
-	public GameObject shootPosition;
+	
 	public GameObject bulletHolePrefab; // bullet hole prefab to instantiate
 	public PlayerHealth health;
 	public float reloadTimer = 0;
 	public int damagePerBullet = 10;
 	public int totalBullets = 160;
 	public int bullets = 32;
-
+	
+	private Transform shootPos;
 	private Ray firedRay; // the ray that will be shot
 	private RaycastHit hit; // variable to hold the object that is hit
 	private GameObject AmmoBox;
-	private Vector3 ammoPosition;
+	private Vector3 position;
 	private bool canShoot = true;
 	
 	// Use this for initialization
@@ -57,6 +58,7 @@ public class RaycastShooting : MonoBehaviour {
 		if (canShoot && bullets > 0 && totalBullets > 0) {
 			print ("Shooting");
 			centerScreenAndFire ();
+			audio.Play();
 			checkForCollisions ();
 			bullets -= 1;
 			canShoot = false;
@@ -79,15 +81,6 @@ public class RaycastShooting : MonoBehaviour {
 		// The method ScreenPointToRay needs to be called from a camera
 		// Since we are using the MainCamera of our scene we can have access to it using the Camera.main
 		firedRay = Camera.main.ScreenPointToRay (screenCenterPoint);
-		audio.Play();
-		fireTracerBullet();
-	}
-
-	void fireTracerBullet() {
-		//Vector3 position = shootPosition.transform.position;
-		Vector3 tracerPosition = shootPosition.transform.position;
-		Quaternion tracerRotation = GameObject.Find("Main Camera").transform.rotation;
-		PhotonNetwork.Instantiate("Ammo - Bullet", tracerPosition, tracerRotation, 0);
 	}
 	
 	void checkForCollisions () {
@@ -141,18 +134,14 @@ public class RaycastShooting : MonoBehaviour {
 
 		if(AmmoBox.tag == "AmmoBox"){
 			PhotonNetwork.Destroy(AmmoBox);
-			ammoPosition = AmmoBox.transform.position;
+			position = AmmoBox.transform.position;
 			totalBullets = 160;
 			Invoke("ItemReinstantiate", 5.0f);
 		}
 	}
 	
 	void ItemReinstantiate () {		
-<<<<<<< HEAD
-		PhotonNetwork.Instantiate("Powerup - AmmoBox", ammoPosition, Quaternion.identity,0);
-=======
-		PhotonNetwork.Instantiate("Powerup - AmmoBox", position, Quaternion.identity,0);
->>>>>>> origin/Jay
+		PhotonNetwork.Instantiate("AmmoBox", position, Quaternion.identity,0);
 		print ("Item has been Instantiated");
 	}
 }

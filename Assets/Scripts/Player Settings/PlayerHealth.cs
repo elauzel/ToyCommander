@@ -3,13 +3,13 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerHealth : Photon.MonoBehaviour {
+	private GameObject healthBox;
+	private Vector3 position;
+
 	public int health;
 	public GameObject obj;
 	public Image healthUI;
 	public Text healthText;
-
-	private GameObject healthBox;
-	private Vector3 position;
 	
 	// Use this for initialization
 	void Start () {
@@ -78,7 +78,7 @@ public class PlayerHealth : Photon.MonoBehaviour {
 	}
 	
 	void ItemReinstantiate () {		
-		PhotonNetwork.Instantiate("Powerup - FirstAid", position, Quaternion.identity,0);
+		PhotonNetwork.Instantiate("FirstAid", position, Quaternion.identity,0);
 		print ("Item has been Instantiated");
 	}
 
