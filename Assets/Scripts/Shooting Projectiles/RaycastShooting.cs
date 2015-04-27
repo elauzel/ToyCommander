@@ -148,7 +148,11 @@ public class RaycastShooting : MonoBehaviour {
 	}
 	
 	void ItemReinstantiate () {		
+<<<<<<< HEAD
 		PhotonNetwork.Instantiate("Powerup - AmmoBox", ammoPosition, Quaternion.identity,0);
+=======
+		PhotonNetwork.Instantiate("Powerup - AmmoBox", position, Quaternion.identity,0);
+>>>>>>> origin/Jay
 		print ("Item has been Instantiated");
 	}
 }
