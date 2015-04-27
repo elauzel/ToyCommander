@@ -4,17 +4,14 @@ using UnityEngine.UI;
 
 public class TeamMember : Photon.MonoBehaviour {
 	public Text score;
-	//int redLivesLeft = 3;
-	//int blueLivesLeft = 3;
+	public int teamID = 0;
 
-	int _teamID = 0;
-
-	public int teamID {
-		get { return _teamID;}
+	int getTeamID {
+		get { return teamID; }
 	}
 
 	[RPC] void SetTeamID(int id) {
-		_teamID = id;
+		teamID = id;
 	}
 
 //	[RPC] void ChangeScore(int team) {
