@@ -95,7 +95,7 @@ public class NewNetwork : Photon.MonoBehaviour {
 		player = PhotonNetwork.Instantiate ("Player - " + type.ToString(), location, Quaternion.identity, 0);
 		
 		if (firstSpawn == false) {
-			player.GetComponent<PhotonView> ().RPC("PlayerRespawn",PhotonTargets.All, teamID);
+			player.GetComponent<PhotonView> ().RPC("PlayerRespawn",PhotonTargets.AllBuffered, teamID);
 			
 		} else {
 			firstSpawn = false;
