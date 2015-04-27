@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class RaycastShooting : MonoBehaviour {
 	
@@ -7,8 +8,9 @@ public class RaycastShooting : MonoBehaviour {
 	public PlayerHealth health;
 	public float reloadTimer = 0;
 	public int damagePerBullet = 10;
-	public int totalBullets = 160;
-	public int bullets = 32;
+	public float totalBullets = 160;
+	public float bullets = 32;
+	private float totalBulletsCalc;
 	
 	private Transform shootPos;
 	private Ray firedRay; // the ray that will be shot
@@ -16,12 +18,16 @@ public class RaycastShooting : MonoBehaviour {
 	private GameObject AmmoBox;
 	private Vector3 position;
 	private bool canShoot = true;
+	public AudioClip machineGunFire;
+	public AudioClip machineGunReload;
+	private Image ammoVisual;
+	private Text ammoText;
 	
 	// Use this for initialization
 	void Start () {
-
+		totalBulletsCalc = totalBullets;
 	}
-
+	
 	void Update() {
 		print (reloadTimer);
 		if (reloadTimer > 0) {
@@ -29,23 +35,36 @@ public class RaycastShooting : MonoBehaviour {
 			ReloadIfAble ();
 		} 
 		
+		
+		
 		if (bullets <= 0 && reloadTimer <= 0) {
-			reloadTimer = 5;
+			audio.Stop();
+			playReload();
+			reloadTimer = 3;
+			
 		}
 	}
-
+	
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (FireButtonHeld ()) {
 			Fire ();
 		}
 	}	
-
+	
+	void playReload()
+	{
+		audio.clip = machineGunReload;
+		audio.Play ();
+	}
 	void ReloadIfAble () {
-		if (reloadTimer <= 0) {
+		
+		if (reloadTimer <= 0 && totalBullets > 0) {
 			totalBullets -= 32;
-			bullets = 32;
+			if (totalBullets > 0)
+				bullets = 32;
 			reloadTimer = 0;
+			UpdateAmmoUI();
 			print ("Bullets: " + bullets);
 		}
 	}
@@ -53,22 +72,32 @@ public class RaycastShooting : MonoBehaviour {
 	static bool FireButtonHeld () {
 		return Input.GetButton ("Fire1");
 	}
-
+	
 	void Fire () {
 		if (canShoot && bullets > 0 && totalBullets > 0) {
 			print ("Shooting");
 			centerScreenAndFire ();
-			audio.Play();
+			
+			ammoVisual = GameObject.Find ("VisualAmmo").GetComponent<Image>();
+			ammoText = GameObject.Find("AmmoText").GetComponent<Text>();
+			
+			audio.clip = machineGunFire;
+			audio.Play ();
+			
 			checkForCollisions ();
 			bullets -= 1;
+			totalBulletsCalc -= 1;
 			canShoot = false;
+			
+			UpdateAmmoUI();
+			
 			print (bullets);
 			StartCoroutine (Wait (0.1F));
 		}
 	}
 	
 	IEnumerator Wait (float waitTime) {
-
+		
 		yield return new WaitForSeconds(waitTime);
 		audio.Stop ();
 		canShoot = true;
@@ -113,35 +142,44 @@ public class RaycastShooting : MonoBehaviour {
 	
 	void updateHealth () {
 		health = hit.collider.transform.gameObject.GetComponent<PlayerHealth> ();
-
+		
 		TeamMember tm = hit.collider.transform.gameObject.GetComponent<TeamMember> ();
 		TeamMember myTm = this.GetComponent<TeamMember> ();
-
+		
 		if (NotOnTeams (tm, myTm) || DifferentTeams (tm, myTm))
 			health.GetComponent<PhotonView> ().RPC ("ChangeHealth", PhotonTargets.AllBuffered, damagePerBullet);
 	}
-
+	
 	static bool NotOnTeams (TeamMember one, TeamMember two) {
 		return one == null || one.teamID == 0 || two == null || two.teamID == 0;
 	}
-
+	
 	static bool DifferentTeams (TeamMember one, TeamMember two) {
 		return one.teamID != two.teamID;
 	}
 	
 	void OnCollisionEnter(Collision collision) {
 		AmmoBox = collision.gameObject;
-
+		
 		if(AmmoBox.tag == "AmmoBox"){
 			PhotonNetwork.Destroy(AmmoBox);
 			position = AmmoBox.transform.position;
 			totalBullets = 160;
+			bullets = 32;
+			totalBulletsCalc = totalBullets;
+			UpdateAmmoUI();
 			Invoke("ItemReinstantiate", 5.0f);
 		}
 	}
 	
 	void ItemReinstantiate () {		
-		PhotonNetwork.Instantiate("AmmoBox", position, Quaternion.identity,0);
+		PhotonNetwork.Instantiate("Powerup - AmmoBox", position, Quaternion.identity,0);
 		print ("Item has been Instantiated");
+	}
+	
+	void UpdateAmmoUI()
+	{
+		ammoVisual.fillAmount = totalBulletsCalc/160;
+		ammoText.text = "Ammo: " + bullets + "/" + totalBullets;
 	}
 }
