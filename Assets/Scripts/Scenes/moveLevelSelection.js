@@ -34,5 +34,5 @@ function moveRight() {
 
 //updates static variable in PersistentGameIdentifier object
 function Update() {
-DontDestroyObject.LevelSelected = world_counter;
+
 }
