@@ -11,7 +11,7 @@ public class GameScore : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		score = GameObject.Find ("UI").GetComponent<Text>();
+		score = GameObject.Find ("GameScore").GetComponent<Text>();
 	}
 	
 	// Update is called once per frame

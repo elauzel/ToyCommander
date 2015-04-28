@@ -98,7 +98,7 @@ public class PlayerHealth : Photon.MonoBehaviour {
 	void ResetTimerAndCamera () {
 		if (gameObject.tag == "Player") {
 			NewNetwork nn = GameObject.FindObjectOfType<NewNetwork> ();
-			nn.standbyCamera.SetActive (true);
+			nn.currentStandbyCamera.SetActive (true);
 			nn.respawnTimer = 3f;
 		}
 	}

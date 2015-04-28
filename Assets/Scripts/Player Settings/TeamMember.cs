@@ -24,4 +24,18 @@ public class TeamMember : Photon.MonoBehaviour {
 		}
 		
 	}
+
+	[RPC]
+	public void levelIncrement(int level)
+	{
+		if (level == 1) {
+			LvlSelecWait.bedroom += 1;
+			print ("Inside Bedroom incrementor");
+		}
+
+			if (level == 2)
+				LvlSelecWait.livingRoom += 1;
+		if (level == 3)
+			LvlSelecWait.kitchen += 1;
+	}
 }
