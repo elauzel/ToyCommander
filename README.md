@@ -4,13 +4,11 @@
 
 1) Ammo bar and values on UI dont reset upon respawn until first shot is fired in new life.
 
-2) Automatically choose level
+2) Taking AmmoBox powerup without firing any shots throws an error and prevents re-instantiation
 
 3) Team score fixing
 
 4) Add SFX to powerups
-
-5) Powerups need to rotate in levels
 
 6) Divide Y component of player spawn locations by 3 to fix vehicles sticking in floor upon spawn
 
@@ -23,10 +21,6 @@
 10) Reload sound doesnt play when the 32 clip runs out but it does when the ammo count is 0/0
 
 11) Reload sound gets looped until more ammo is gotten
-
-12) Respawn locations
-
-13) Taking AmmoBox powerup without firing any shots throws an error and prevents re-instantiation
 
 --- Jeremy
 
@@ -46,4 +40,4 @@
 
 2) Auto-Upright script for Vehicles
 
-3) Put Box Colliders on LivingRoom Lamp Bases
+3) Powerups need to rotate in levels
