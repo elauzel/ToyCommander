@@ -10,17 +10,15 @@
 
 4) Add SFX to powerups
 
-6) Divide Y component of player spawn locations by 3 to fix vehicles sticking in floor upon spawn
+5) Reload sound gets looped until more ammo is gotten
 
-7) Clamp movement for first half-second after respawned
+6) Clamp movement for first half-second after respawned
 
-8) Total ammo count needs to display as 128 instead of 160 at first
+7) Total ammo count needs to display as 128 instead of 160 at first, since 128 + 32 = 160
 
-9) UI needs to update Ammo amount after death rather than after the first shot
+8) UI needs to update Ammo amount after death rather than after the first shot
 
-10) Reload sound doesnt play when the 32 clip runs out but it does when the ammo count is 0/0
-
-11) Reload sound gets looped until more ammo is gotten
+9) Reload sound doesnt play when the 32 clip runs out but it does when the ammo count is 0/0
 
 --- Jeremy
 
