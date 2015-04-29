@@ -38,6 +38,8 @@
 
 4) Tank still pulls to the right when moving forward
 
+5) Put paintings in Kitchen and Living Room
+
 --- Jay
 
 1) Fix Fireplace Mantle, Solo Cup PREFAB, Bookcase
