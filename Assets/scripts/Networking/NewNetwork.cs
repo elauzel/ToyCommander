@@ -24,8 +24,8 @@ public class NewNetwork : Photon.MonoBehaviour {
 	private bool connected = false;
 	int character;
 	int level;
-	bool hasCharacter;
-	bool hasLevel;
+	public static bool hasCharacter;
+	public static bool hasLevel;
 	int mylevel;
 
 

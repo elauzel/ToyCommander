@@ -10,6 +10,7 @@ public class PlayerHealth : Photon.MonoBehaviour {
 	public GameObject obj;
 	private Image healthUI;
 	private Text healthText;
+
 	
 	
 	
