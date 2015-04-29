@@ -55,12 +55,12 @@ public class GameScore : Photon.MonoBehaviour {
 
 	void CheckGameWon() { 
 		if (redLivesLeft <= 0) {
-			print ("Red Team Lost");
+			//print ("Red Team Lost");
 			GameWon (1);
 		}
 		
 		if (blueLivesLeft <= 0) {
-			print ("Blue Team Lost");
+			//print ("Blue Team Lost");
 			GameWon (2);
 		}
 	}

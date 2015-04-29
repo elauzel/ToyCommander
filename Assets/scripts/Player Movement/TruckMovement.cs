@@ -8,7 +8,7 @@ public class TruckMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Start time on Truck:" + Time.deltaTime);
+//		Debug.Log("Start time on Truck:" + Time.deltaTime);
 		body = GetComponent<Rigidbody>();
 	}
 	
@@ -18,7 +18,7 @@ public class TruckMovement : MonoBehaviour {
 	}
 
 	void FixedUpdate ()	{
-		Debug.Log("FixedUpdate time on Truck:" + Time.deltaTime);
+//		Debug.Log("FixedUpdate time on Truck:" + Time.deltaTime);
 		InputMovement();
 	}
 	

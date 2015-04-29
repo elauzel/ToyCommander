@@ -29,7 +29,7 @@ public class RaycastShooting : MonoBehaviour {
 	}
 	
 	void Update() {
-		print (reloadTimer);
+		//print (reloadTimer);
 		if (reloadTimer > 0) {
 			reloadTimer -= Time.deltaTime;
 			ReloadIfAble ();
@@ -183,3 +183,5 @@ public class RaycastShooting : MonoBehaviour {
 		ammoText.text = "Ammo: " + bullets + "/" + totalBullets;
 	}
 }
+
+		
