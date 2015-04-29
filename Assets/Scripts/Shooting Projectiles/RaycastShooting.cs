@@ -8,7 +8,8 @@ public class RaycastShooting : MonoBehaviour {
 	public PlayerHealth health;
 	public float reloadTimer = 0;
 	public int damagePerBullet = 10;
-	public float totalBullets = 160;
+	public float totalBullets = 128;
+	public float bulletsDisplayed = 128;
 	public float bullets = 32;
 	private float totalBulletsCalc;
 	
@@ -33,9 +34,7 @@ public class RaycastShooting : MonoBehaviour {
 		if (reloadTimer > 0) {
 			reloadTimer -= Time.deltaTime;
 			ReloadIfAble ();
-		} 
-		
-		
+		}		
 		
 		if (bullets <= 0 && reloadTimer <= 0) {
 			audio.Stop();
@@ -52,13 +51,11 @@ public class RaycastShooting : MonoBehaviour {
 		}
 	}	
 	
-	void playReload()
-	{
+	void playReload() {
 		audio.clip = machineGunReload;
 		audio.Play ();
 	}
 	void ReloadIfAble () {
-		
 		if (reloadTimer <= 0 && totalBullets > 0) {
 			totalBullets -= 32;
 			if (totalBullets > 0)
@@ -173,15 +170,12 @@ public class RaycastShooting : MonoBehaviour {
 	}
 	
 	void ItemReinstantiate () {		
-		PhotonNetwork.Instantiate("Powerup - AmmoBox", position, Quaternion.identity,0);
+		PhotonNetwork.Instantiate("Powerup - AmmoBox", position, Quaternion.Euler(0,0,90),0);
 		print ("Item has been Instantiated");
 	}
 	
-	void UpdateAmmoUI()
-	{
+	void UpdateAmmoUI() {
 		ammoVisual.fillAmount = totalBulletsCalc/160;
-		ammoText.text = "Ammo: " + bullets + "/" + totalBullets;
+		ammoText.text = "Ammo: " + bullets + "/" + Mathf.Max(0,totalBullets-32);
 	}
 }
-
-		

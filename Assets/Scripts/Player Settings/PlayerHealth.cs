@@ -84,7 +84,7 @@ public class PlayerHealth : Photon.MonoBehaviour {
 	}
 	
 	void ItemReinstantiate () {		
-		PhotonNetwork.Instantiate("Powerup - FirstAid", position, Quaternion.identity,0);
+		PhotonNetwork.Instantiate("Powerup - FirstAid", position, Quaternion.Euler(90,0,0),0);
 		print ("Item has been Instantiated");
 	}
 	
