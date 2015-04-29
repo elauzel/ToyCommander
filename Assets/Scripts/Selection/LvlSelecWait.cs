@@ -11,7 +11,7 @@ public class LvlSelecWait : MonoBehaviour {
 
 	private Text text;
 	private Text countdownText;
-	float countdown = 2;
+	float countdown = 10;
 	NewNetwork nn;
 
 	// Use this for initialization
@@ -29,7 +29,7 @@ public class LvlSelecWait : MonoBehaviour {
 		if (countdown > 0) {
 			text.text = "Bedroom: " + bedroom + "   Living Room: " + livingRoom + "   Kitchen: " + kitchen;
 			countdown -= Time.deltaTime;
-			countdownText.text = "Countdown: "+countdown;
+			countdownText.text = "Countdown: " + countdown;
 
 		}
 
@@ -37,7 +37,7 @@ public class LvlSelecWait : MonoBehaviour {
 			countdownText.text = "Countdown: 0";
 
 
-			if (NewNetwork.levelsPlayed == 2)// kitchen > livingRoom && kitchen > bedroom) {// kitchen wins
+			if (NewNetwork.levelsPlayed == 2) {
 			
 				nn.levelChosen (2);
 
@@ -49,10 +49,10 @@ public class LvlSelecWait : MonoBehaviour {
 
 			}
 			waitingUI.SetActive (false);
-			inGameUI.SetActive(true);
+			inGameUI.SetActive (true);
 
 		}
-		//
+	}
 
 
 
