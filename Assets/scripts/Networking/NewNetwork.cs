@@ -27,10 +27,11 @@ public class NewNetwork : Photon.MonoBehaviour {
 	public static bool hasCharacter;
 	public static bool hasLevel;
 	int mylevel;
+	int spawnDecider;
 
 
-	
-	
+	public static int levelsPlayed = 0;
+
 	public enum PlayerType {
 
 		Helicopter,Plane,Tank,Racecar,Truck
@@ -38,8 +39,10 @@ public class NewNetwork : Photon.MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		levelsPlayed += 1;
+		print (levelsPlayed);
 		location = new Vector3 (x, y, z);
-		Debug.Log("Start time on NewNetwork:" + Time.deltaTime);
+		//Debug.Log("Start time on NewNetwork:" + Time.deltaTime);
 		PhotonNetwork.ConnectUsingSettings("0.1");
 	}
 	
@@ -90,26 +93,65 @@ public class NewNetwork : Photon.MonoBehaviour {
 		this.level = level;
 		print("Level Chosen: " + level);
 		if (level == 1) {
-			location = new Vector3((float)62.07,(float)5.67,(float)41.83);
 			currentStandbyCamera = bedroomStandbyCamera;
+			SetSpawn(level);
 		}
 		if (level == 2) {
-			location = new Vector3((float)-27.85,(float)20.571,(float)-298.65);
 			currentStandbyCamera = kitchenStandbyCamera;
+			SetSpawn(level);
 		}
 		if (level == 3) {
-			location = new Vector3((float)102.7,(float)10.82,(float)-131.86);
 			currentStandbyCamera = livingRoomStandbyCamera;
+			SetSpawn(level);
 		}
 		hasLevel = true;
 		currentStandbyCamera.SetActive (true);
 		
+	}
+
+	void SetSpawn(int thisLevel)
+	{
+		if (level == 1) {
+			spawnDecider = Random.Range (1, 4);
+			if (spawnDecider == 1){
+				location = new Vector3((float)96,(float)0.5,(float)60);
+			}
+			else if(spawnDecider ==2){
+				location = new Vector3((float)100,(float)0.5,(float)-15);
+			}
+			else{
+				location = new Vector3((float)53,(float)0.5,(float)-35);
+			}
+		}
+		if (level == 2) {
+			spawnDecider = Random.Range (1, 4);
+			if (spawnDecider == 1) {
+				location = new Vector3 ((float)60, (float)10.7, (float)41.83);
+			} else if (spawnDecider == 2) {
+				location = new Vector3 ((float)-43, (float)10.7, (float)-293);
+			} else {
+				location = new Vector3 ((float)-7, (float)10.7, (float)-365);
+			}
+		}
+
+		if (level == 3) {
+			spawnDecider = Random.Range (1, 4);
+			if (spawnDecider == 1) {
+				location = new Vector3 ((float)183, (float)2, (float)-82);
+			} else if (spawnDecider == 2) {
+				location = new Vector3 ((float)149, (float)2, (float)-145);
+			} else {
+				location = new Vector3 ((float)79, (float)2, (float)-81);
+			}
+
+		}
 	}
 	
 	
 	void RespawnIfAble () {
 		if (respawnTimer <= 0) {
 			OnJoinedRoom ();
+			SetSpawn(level);
 			SpawnPlayerAt (location, teamID); 
 		}
 	}	
@@ -125,11 +167,11 @@ public class NewNetwork : Photon.MonoBehaviour {
 	}
 	
 	void ShowTeamButtons () {
-		if (GUILayout.Button ("Red Team"))
-			SpawnPlayerAt (location, 1);
-		if (GUILayout.Button ("Blue Team"))
-			SpawnPlayerAt (location, 2);
-		if (GUILayout.Button ("Random"))
+		//if (GUILayout.Button ("Red Team"))
+			//SpawnPlayerAt (location, 1);
+		//if (GUILayout.Button ("Blue Team"))
+		//	SpawnPlayerAt (location, 2);
+		//if (GUILayout.Button ("Random"))
 			SpawnPlayerAt (location, Random.Range (1, 3));
 	}
 	
@@ -159,7 +201,7 @@ public class NewNetwork : Photon.MonoBehaviour {
 		this.teamID = teamID;
 		hasPickedTeam = true;
 		player = PhotonNetwork.Instantiate ("Player - " + type.ToString(), location, Quaternion.identity, 0);
-		
+		Screen.showCursor = false;
 		if (firstSpawn == false) {
 			player.GetComponent<PhotonView> ().RPC("PlayerRespawn",PhotonTargets.AllBuffered, teamID);
 			

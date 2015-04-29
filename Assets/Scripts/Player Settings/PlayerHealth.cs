@@ -19,7 +19,7 @@ public class PlayerHealth : Photon.MonoBehaviour {
 	}
 	
 	void FixedUpdate() {
-		Debug.Log("FixedUpdate time on PlayerHealth:" + Time.deltaTime);
+		//Debug.Log("FixedUpdate time on PlayerHealth:" + Time.deltaTime);
 	}
 	
 	// Update is called once per frame
