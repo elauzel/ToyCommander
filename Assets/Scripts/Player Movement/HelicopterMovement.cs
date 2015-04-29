@@ -43,11 +43,11 @@ public class HelicopterMovement : MonoBehaviour {
 		}
 		
 		if (Input.GetKey (KeyCode.Space)) {
-			PlayerMovement.floatWith (body, speedGas);
+			PlayerMovement.floatWith (body, speedGas/2);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftShift)) {
-			PlayerMovement.floatWith (body, -speedGas);
+			PlayerMovement.floatWith (body, -speedGas/2);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {

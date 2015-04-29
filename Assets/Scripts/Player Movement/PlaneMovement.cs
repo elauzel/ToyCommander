@@ -48,11 +48,11 @@ public class PlaneMovement : MonoBehaviour {
 		}
 		
 		if (Input.GetKey (KeyCode.Space)) {
-			PlayerMovement.floatWith (body, speedGas/15);
+			PlayerMovement.floatWith (body, speedGas/30);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftShift)) {
-			PlayerMovement.floatWith (body, -speedGas/15);
+			PlayerMovement.floatWith (body, -speedGas/30);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {
