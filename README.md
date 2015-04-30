@@ -1,11 +1,5 @@
 # ToyCommander
 
---- MUI IMPORTANTE
-
-*1) Team score fixing
-
-*2) Halos over network
-
 --- UI and SFX
 
 1) Add SFX to powerups
@@ -23,5 +17,3 @@
 --- Environment
 
 1) Fix Fireplace Mantle, Solo Cup PREFAB, Bookcase
-
-2) Put paintings in Kitchen and Living Room
