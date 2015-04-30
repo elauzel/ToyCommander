@@ -69,13 +69,13 @@ public class MoveLevelSelection : Photon.MonoBehaviour {
 		GameObject.Find ("Level - Level Select").SetActive (false);
 		waitingUI.SetActive (true);
 		//GetComponent<PhotonView>().RPC ("levelIncrement", PhotonTargets.AllBuffered, level_counter);
-		if (NewNetwork.levelsPlayed == 1)
+		if (NewNetwork.levelsPlayed == 1) {
 			LvlSelecWait.bedroom += 1;
-		else
-			if (NewNetwork.levelsPlayed == 2)
-				LvlSelecWait.livingRoom += 1;
-		else
-			LvlSelecWait.kitchen += 1;
+		} else if (NewNetwork.levelsPlayed == 2) {
+				LvlSelecWait.kitchen += 1;
+		} else {
+			LvlSelecWait.livingRoom += 1;
+		}
 	}
 
 
