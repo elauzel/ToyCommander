@@ -53,9 +53,12 @@ public class PlayerHealth : Photon.MonoBehaviour {
 	}
 	
 	void OnGUI() {
+
 		if (GetComponent<PhotonView> ().isMine && gameObject.tag == "Player") {
+			if (Input.GetKey(KeyCode.Escape)){
 			CheckForSuicide ();
 			CheckForDamage ();
+				}
 		}
 	}
 	
@@ -79,7 +82,7 @@ public class PlayerHealth : Photon.MonoBehaviour {
 			position = healthBox.transform.position;
 			health = 100;
 			HandleHealth();
-			Invoke("ItemReinstantiate", 5.0f);
+			Invoke("ItemReinstantiate", 15.0f);
 		}
 	}
 	

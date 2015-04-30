@@ -200,7 +200,7 @@ public class NewNetwork : Photon.MonoBehaviour {
 	void SpawnPlayerAt (Vector3 location, int teamID) {
 		this.teamID = teamID;
 		hasPickedTeam = true;
-		player = PhotonNetwork.Instantiate ("Player - " + type.ToString(), location, Quaternion.identity, 0);
+		player = PhotonNetwork.Instantiate ("Player - " + type.ToString()+teamID, location, Quaternion.identity, 0);
 		Screen.showCursor = false;
 		if (firstSpawn == false) {
 			player.GetComponent<PhotonView> ().RPC("PlayerRespawn",PhotonTargets.AllBuffered, teamID);

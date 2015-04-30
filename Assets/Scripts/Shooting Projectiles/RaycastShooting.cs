@@ -83,7 +83,7 @@ public class RaycastShooting : MonoBehaviour {
 		}
 
 		if (canShoot && bullets > 0 && totalBullets > 0) {
-			print ("Shooting");
+			//print ("Shooting");
 			centerScreenAndFire ();
 			
 			ammoVisual = GameObject.Find ("VisualAmmo").GetComponent<Image>();
@@ -99,7 +99,7 @@ public class RaycastShooting : MonoBehaviour {
 			
 			UpdateAmmoUI();
 			
-			print (bullets);
+			//print (bullets);
 			StartCoroutine (Wait (0.1F));
 		}
 	}
@@ -123,11 +123,11 @@ public class RaycastShooting : MonoBehaviour {
 	void checkForCollisions () {
 		if (collision ()) {
 			placeBulletHole ();
-			print ("Hit " + hit.collider.transform.gameObject.name + "!");
+			//print ("Hit " + hit.collider.transform.gameObject.name + "!");
 			try {
 				updateHealth ();
 			} catch {
-				Debug.Log("Couldn't update health!");
+				//Debug.Log("Couldn't update health!");
 			}
 		}
 	}
@@ -176,13 +176,13 @@ public class RaycastShooting : MonoBehaviour {
 			bullets = 32;
 			totalBulletsCalc = totalBullets;
 			UpdateAmmoUI();
-			Invoke("ItemReinstantiate", 5.0f);
+			Invoke("ItemReinstantiate", 15.0f);
 		}
 	}
 	
 	void ItemReinstantiate () {		
 		PhotonNetwork.Instantiate("Powerup - AmmoBox", position, Quaternion.Euler(0,0,90),0);
-		print ("Item has been Instantiated");
+		//print ("Item has been Instantiated");
 	}
 	
 	void UpdateAmmoUI() {
