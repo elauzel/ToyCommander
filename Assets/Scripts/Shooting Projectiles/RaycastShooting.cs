@@ -40,19 +40,14 @@ public class RaycastShooting : MonoBehaviour {
 		if (reloadTimer > 0) {
 			reloadTimer -= Time.deltaTime;
 			ReloadIfAble ();
-
-			//the fix for the reload sfx timing
-			if (totalBullets > 0) {
-				playReload ();
-			}
-
 		}
 		
 		if (bullets <= 0 && reloadTimer <= 0) {
 			//audio.Stop();
-			reloadTimer = 3;
+			reloadTimer = 4;
 		}
-			
+
+
 	}
 	
 	// Update is called once per frame
@@ -63,7 +58,8 @@ public class RaycastShooting : MonoBehaviour {
 	}	
 	
 	void playReload() {
-		audio.PlayOneShot (machineGunReload);
+		audio.clip = machineGunReload;
+		audio.Play ();
 	}
 
 	void ReloadIfAble () {
@@ -82,6 +78,10 @@ public class RaycastShooting : MonoBehaviour {
 	}
 	
 	void Fire () {
+		if (bullets == 0 && totalBullets > 0) {
+			playReload();
+		}
+
 		if (canShoot && bullets > 0 && totalBullets > 0) {
 			print ("Shooting");
 			centerScreenAndFire ();
@@ -188,5 +188,6 @@ public class RaycastShooting : MonoBehaviour {
 	void UpdateAmmoUI() {
 		ammoVisual.fillAmount = totalBulletsCalc/160;
 		ammoText.text = "Ammo: " + bullets + "/" + Mathf.Max(0,totalBullets-32);
+
 	}
 }
