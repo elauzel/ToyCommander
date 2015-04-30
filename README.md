@@ -2,9 +2,9 @@
 
 --- MUI IMPORTANTE
 
-*2) Team score fixing
+*1) Team score fixing
 
-*3) Halos over network
+*2) Halos over network
 
 --- UI and SFX
 
