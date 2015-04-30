@@ -27,6 +27,12 @@ public class RaycastShooting : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		totalBulletsCalc = totalBullets;
+		//fixes to ammo gui issues as well as null exception for ammo boxes with no shots fired
+		ammoVisual = GameObject.Find ("VisualAmmo").GetComponent<Image>();
+		ammoText = GameObject.Find("AmmoText").GetComponent<Text>();
+
+		ammoVisual.fillAmount = totalBulletsCalc/160;
+		ammoText.text = "Ammo: " + bullets + "/" + Mathf.Max(0,totalBullets-32);
 	}
 	
 	void Update() {
@@ -34,14 +40,19 @@ public class RaycastShooting : MonoBehaviour {
 		if (reloadTimer > 0) {
 			reloadTimer -= Time.deltaTime;
 			ReloadIfAble ();
-		}		
+
+			//the fix for the reload sfx timing
+			if (totalBullets > 0) {
+				playReload ();
+			}
+
+		}
 		
 		if (bullets <= 0 && reloadTimer <= 0) {
-			audio.Stop();
-			playReload();
+			//audio.Stop();
 			reloadTimer = 3;
-			
 		}
+			
 	}
 	
 	// Update is called once per frame
@@ -52,9 +63,9 @@ public class RaycastShooting : MonoBehaviour {
 	}	
 	
 	void playReload() {
-		audio.clip = machineGunReload;
-		audio.Play ();
+		audio.PlayOneShot (machineGunReload);
 	}
+
 	void ReloadIfAble () {
 		if (reloadTimer <= 0 && totalBullets > 0) {
 			totalBullets -= 32;
